@@ -289,6 +289,7 @@ body.pt-work-ready .hero-grid>*:nth-child(2){transition-delay:.08s}
 body.pt-work-ready .paths{opacity:1;transform:none;transition:opacity .55s ease .16s,transform .65s cubic-bezier(.16,1,.3,1) .16s}
 @media(prefers-reduced-motion:reduce){.page-transition{display:none!important}body.pt-work-enter .hero-grid>*,body.pt-work-enter .paths{opacity:1!important;transform:none!important}}
 </style>
+<style id="project-motion-contrast-v3">.product{--project-ink:#F7F4EE;--project-muted:rgba(247,244,238,.76);--project-line:rgba(247,244,238,.34);--project-accent:#E53935;--project-accent-ink:#fff;transition:background-color .5s cubic-bezier(.22,1,.36,1),color .35s ease!important}.product .eyebrow,.product .section-head p,.product .project-btn small{color:var(--project-muted)!important;opacity:1!important}.product .project-list{border-top-color:var(--project-line)!important}.product .project-btn{color:var(--project-ink)!important;border-bottom-color:var(--project-line)!important;transition:background .25s ease,padding .25s ease,color .25s ease}.product .project-btn.active{background:color-mix(in srgb,var(--project-accent) 20%,transparent)!important;box-shadow:inset 3px 0 0 var(--project-accent)}.product .project-btn:focus-visible{outline:2px solid var(--project-accent);outline-offset:3px}.product .story .q{color:var(--project-ink)!important}.product .tags span{color:var(--project-ink)!important;border-color:var(--project-line)!important;background:color-mix(in srgb,var(--project-ink) 5%,transparent)}.product .case-link{color:var(--project-ink)!important;border-bottom-color:var(--project-accent)!important;border-bottom-width:2px}.product .visual .index{background:var(--project-accent)!important;color:var(--project-accent-ink)!important}.product .visual .view{background:var(--project-ink)!important;color:#171714!important}.visual.project-exit{animation:projectVisualExit .36s cubic-bezier(.55,.06,.68,.19) both}.visual.project-enter{transform:translateY(72px);opacity:0}.visual.project-enter.project-enter-active{transform:translateY(0);opacity:1;transition:transform .54s cubic-bezier(.16,1,.3,1),opacity .42s ease}.story.project-exit{animation:projectStoryExit .3s cubic-bezier(.55,.06,.68,.19) both}.story.project-enter .eyebrow,.story.project-enter .q,.story.project-enter .tags,.story.project-enter .case-link{opacity:0;transform:translateY(34px)}.story.project-enter.project-enter-active .eyebrow,.story.project-enter.project-enter-active .q,.story.project-enter.project-enter-active .tags,.story.project-enter.project-enter-active .case-link{opacity:1;transform:translateY(0);transition:opacity .4s ease,transform .5s cubic-bezier(.16,1,.3,1)}.story.project-enter.project-enter-active .q{transition-delay:.05s}.story.project-enter.project-enter-active .tags{transition-delay:.11s}.story.project-enter.project-enter-active .case-link{transition-delay:.17s}@keyframes projectVisualExit{to{transform:translateY(-72px);opacity:0}}@keyframes projectStoryExit{to{transform:translateY(-38px);opacity:0}}@media(prefers-reduced-motion:reduce){.visual.project-exit,.story.project-exit{animation:none!important}.visual.project-enter,.story.project-enter .eyebrow,.story.project-enter .q,.story.project-enter .tags,.story.project-enter .case-link{transform:none!important;opacity:1!important;transition:none!important}}</style>
 </head>
  <body>
 <div class="page-transition" id="pageTransition" aria-hidden="true"><div class="page-transition__shape"></div><div class="page-transition__label">INDEX / 01 &nbsp;→&nbsp; WORK / 02</div></div>
@@ -390,52 +391,12 @@ body.pt-work-ready .paths{opacity:1;transform:none;transition:opacity .55s ease 
       </a>
       <div class="project-info">
        <div class="project-list">
-        <button class="project-btn active" data-i="0">
-         <small>
-          01
-         </small>
-         <b>
-          SANDBOX
-         </b>
-         <small>
-          PRODUCT
-         </small>
-        </button>
-        <button class="project-btn" data-i="1">
-         <small>
-          02
-         </small>
-         <b>
-          STYLEPRISM
-         </b>
-         <small>
-          FASHION
-         </small>
-        </button>
-        <button class="project-btn" data-i="2">
-         <small>
-          03
-         </small>
-         <b>
-          VISIONEASE
-         </b>
-         <small>
-          ACCESSIBILITY
-         </small>
-        </button>
-        <button class="project-btn" data-i="3">
-         <small>
-          04
-         </small>
-         <b>
-          SONY ALPHA
-         </b>
-         <small>
-          CAMERA UI
-         </small>
-        </button>
-       </div>
-       <div class="story">
+         <button class="project-btn active" data-i="0"><small>01</small><b>SONY ALPHA</b><small>CAMERA UI</small></button>
+         <button class="project-btn" data-i="1"><small>02</small><b>VISIONEASE</b><small>ACCESSIBILITY</small></button>
+         <button class="project-btn" data-i="2"><small>03</small><b>CITY ORCHESTRA</b><small>INTERACTION</small></button>
+         <button class="project-btn" data-i="3"><small>04</small><b>STYLEPRISM</b><small>FASHION</small></button>
+        </div>
+        <div class="story">
         <div class="eyebrow">
          THE QUESTION
         </div>
@@ -443,7 +404,7 @@ body.pt-work-ready .paths{opacity:1;transform:none;transition:opacity .55s ease 
         </div>
         <div class="tags" id="projectTags">
         </div>
-        <a class="case-link" href="careerexpo.html" id="projectLink">
+        <a class="case-link" href="sony.html" id="projectLink">
          Walk through my thinking &nearrow;
         </a>
        </div>
@@ -702,7 +663,12 @@ body.pt-work-ready .paths{opacity:1;transform:none;transition:opacity .55s ease 
    </span>
   </footer>
   <script>
-   const projects=[{name:'Sandbox',img:'careerexpo1.jpg',href:'careerexpo.html',bg:'#e6bb3f',ink:'#171714',q:"Why does choosing a career feel so overwhelming when you're only just starting to figure yourself out?",tags:['Research','Product strategy','UI/UX'],link:'Walk through my thinking ↗'},{name:'StylePrism',img:'work-image-1.png',href:'style.html',bg:'#896b59',ink:'#faf5ec',q:'Why do we own so many clothes and still feel like we have nothing to wear?',tags:['Interaction','Visual system','Prototype'],link:'See how it evolved ↗'},{name:'VisionEase',img:'work-image-2.png',href:'visionease.html',bg:'#49345e',ink:'#faf7ff',q:'Why should someone have to dig through settings just to make a screen comfortable to use?',tags:['Accessibility','Research','Interaction'],link:'Explore the accessible experience ↗'},{name:'Sony Alpha',img:'work-image-3.png',href:'sony.html',bg:'#151515',ink:'#f5f3ee',q:"What happens when the shot is ready but you're still searching for the right setting?",tags:['Information architecture','Camera UI','Interaction'],link:'See the interface rethink ↗'}];const section=document.querySelector('.product'),img=document.querySelector('#projectImg'),visual=document.querySelector('#projectVisual'),idx=document.querySelector('#projectIndex'),q=document.querySelector('#projectQuestion'),tags=document.querySelector('#projectTags'),link=document.querySelector('#projectLink'),btns=[...document.querySelectorAll('.project-btn')];function select(i){const p=projects[i];btns.forEach((b,n)=>b.classList.toggle('active',n===i));img.style.opacity=0;setTimeout(()=>{img.src=p.img;img.alt=p.name+' project';img.style.opacity=1},170);visual.href=p.href;idx.textContent=String(i+1).padStart(2,'0');q.textContent=p.q;tags.innerHTML=p.tags.map(t=>`<span>${t}</span>`).join('');link.href=p.href;link.textContent=p.link;section.style.background=p.bg;section.style.color=p.ink}btns.forEach((b,i)=>{b.addEventListener('click',()=>select(i));b.addEventListener('mouseenter',()=>select(i))});select(0);
+   const projects=[{name:'Sony Alpha',img:'work-image-3.png',href:'sony.html',bg:'#151515',ink:'#F7F4EE',muted:'rgba(247,244,238,.76)',line:'rgba(247,244,238,.34)',accent:'#E53935',accentInk:'#FFFFFF',q:"What happens when the shot is ready but you're still searching for the right setting?",tags:['Information architecture','Camera UI','Interaction'],link:'See the interface rethink ↗'},{name:'VisionEase',img:'work-image-2.png',href:'visionease.html',bg:'#49345E',ink:'#FFF9FF',muted:'rgba(255,249,255,.78)',line:'rgba(255,249,255,.34)',accent:'#D9C4F2',accentInk:'#2C1D3A',q:'Why should someone have to dig through settings just to make a screen comfortable to use?',tags:['Accessibility','Research','Interaction'],link:'Explore the accessible experience ↗'},{name:'City Orchestra',img:'city-orchestra.jpg',href:'city-orchestra.html',bg:'#7A145F',ink:'#FFF7FC',muted:'rgba(255,247,252,.80)',line:'rgba(255,247,252,.36)',accent:'#FF8ADE',accentInk:'#3A082B',q:"What if every step you took became part of a song you didn't know you were creating?",tags:['Interaction Design','Physical Computing','Creative Technology'],link:'Explore the interaction ↗'},{name:'StylePrism',img:'work-image-1.png',href:'style.html',bg:'#896B59',ink:'#FFF9F1',muted:'rgba(255,249,241,.80)',line:'rgba(255,249,241,.36)',accent:'#F2D9C4',accentInk:'#493326',q:'Why do we own so many clothes and still feel like we have nothing to wear?',tags:['Interaction','Visual system','Prototype'],link:'See how it evolved ↗'}];
+   const section=document.querySelector('.product'),img=document.querySelector('#projectImg'),visual=document.querySelector('#projectVisual'),idx=document.querySelector('#projectIndex'),q=document.querySelector('#projectQuestion'),tags=document.querySelector('#projectTags'),link=document.querySelector('#projectLink'),story=document.querySelector('.story'),btns=[...document.querySelectorAll('.project-btn')];let currentProject=0,isProjectAnimating=false;
+   function applyTheme(p){section.style.setProperty('--project-ink',p.ink);section.style.setProperty('--project-muted',p.muted);section.style.setProperty('--project-line',p.line);section.style.setProperty('--project-accent',p.accent);section.style.setProperty('--project-accent-ink',p.accentInk);section.style.background=p.bg;section.style.color=p.ink}
+   function renderProject(i){const p=projects[i];btns.forEach((b,n)=>b.classList.toggle('active',n===i));img.src=p.img;img.alt=p.name+' project';visual.href=p.href;idx.textContent=String(i+1).padStart(2,'0');q.textContent=p.q;tags.innerHTML=p.tags.map(t=>`<span>${t}</span>`).join('');link.href=p.href;link.textContent=p.link;applyTheme(p)}
+   function select(i){if(i===currentProject||isProjectAnimating)return;isProjectAnimating=true;visual.classList.add('project-exit');story.classList.add('project-exit');setTimeout(()=>{renderProject(i);visual.classList.remove('project-exit');story.classList.remove('project-exit');visual.classList.add('project-enter');story.classList.add('project-enter');requestAnimationFrame(()=>requestAnimationFrame(()=>{visual.classList.add('project-enter-active');story.classList.add('project-enter-active')}));setTimeout(()=>{visual.classList.remove('project-enter','project-enter-active');story.classList.remove('project-enter','project-enter-active');currentProject=i;isProjectAnimating=false},560)},360)}
+   btns.forEach((b,i)=>b.addEventListener('click',()=>select(i)));renderProject(0);
 let x=12,score=0;const runner=document.querySelector('#runner'),scoreEl=document.querySelector('#score'),world=document.querySelector('.game-world');function move(d){x=Math.max(3,Math.min(88,x+d));runner.style.left=x+'%';score+=1;scoreEl.textContent=String(score).padStart(3,'0')}document.querySelector('#left').addEventListener('click',()=>move(-5));document.querySelector('#right').addEventListener('click',()=>move(5));world.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-5)}if(e.key==='ArrowRight'){e.preventDefault();move(5)}});const wall=document.querySelector('#wall'),mess=document.querySelector('#mess');mess.addEventListener('click',()=>{const on=wall.classList.toggle('messy');mess.textContent=on?'OKAY, FIX IT.':'MAKE A MESS ↗'});
   </script>
   <script id="playground-gallery-v2-script">
