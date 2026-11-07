@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Eeshitvaa &mdash; Work
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Nunito+Sans:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=Syne:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+  <style>
+   :root{--paper:#f7f6f2;--ink:#11110f;--muted:#69675f;--yellow:#e7b62f;--line:rgba(17,17,15,.16);--display:'Nunito Sans',sans-serif;--body:'DM Sans',sans-serif;--ease:cubic-bezier(.22,1,.36,1)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1500px,90vw);margin:auto}.nav{height:92px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:20}.brand{font-weight:700;letter-spacing:-.04em}.navlinks{display:flex;gap:7px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.62)}.navlinks a{font-size:12px;font-weight:700;padding:9px 15px;border-radius:999px}.navlinks a.active{background:var(--ink);color:white}.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.hero{
+  min-height:calc(100vh - 142px);
+  display:grid;
+  align-content:start;
+  padding:8px 0 70px;
+}.hero-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:8vw;align-items:end}.hero h1{font:900 clamp(58px,8.4vw,132px)/.82 var(--display);letter-spacing:-.065em;margin:18px 0 0;max-width:9ch}.hero-copy{font-size:17px;line-height:1.65;color:var(--muted);max-width:420px;margin-bottom:12px}.paths{margin-top:80px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr)}.path{padding:25px 18px 25px 0;border-right:1px solid var(--line);position:relative;transition:.3s var(--ease)}.path:nth-child(2),.path:nth-child(3){padding-left:24px}.path:last-child{border-right:0}.path small{display:block;font-size:11px;color:var(--muted);margin-bottom:13px}.path strong{font:800 clamp(22px,2.3vw,36px)/1 var(--display);letter-spacing:-.04em}.path span{display:block;margin-top:8px;font-size:12px;color:var(--muted)}.path:hover{padding-top:19px}.path:hover:after{content:'';position:absolute;left:0;right:18px;bottom:0;height:5px;background:var(--yellow);border-radius:9px}.hand{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#80620e;display:inline-block}.section{padding:130px 0}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:end;margin-bottom:70px}.section-head h2{font:900 clamp(48px,6vw,92px)/.86 var(--display);letter-spacing:-.06em;margin:14px 0 0;max-width:9ch}.section-head p{color:var(--muted);line-height:1.7;max-width:420px}.product{transition:background .65s var(--ease),color .5s;padding-top:120px}.project-stage{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,.7fr);gap:5vw;align-items:start}.visual{height:min(68vw,700px);max-height:700px;border-radius:26px;overflow:hidden;position:relative;background:#dedbd3}.visual img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),opacity .35s}.visual:hover img{transform:scale(1.018)}.visual .index{position:absolute;top:22px;left:22px;background:var(--yellow);padding:9px 12px;border-radius:999px;font-size:11px;font-weight:700}.visual .view{position:absolute;right:22px;bottom:22px;background:var(--ink);color:#fff;padding:11px 15px;border-radius:999px;font-size:11px;font-weight:700}.project-info{min-height:590px;display:flex;flex-direction:column}.project-list{border-top:1px solid currentColor}.project-btn{width:100%;border:0;border-bottom:1px solid color-mix(in srgb,currentColor 20%,transparent);background:none;color:inherit;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;text-align:left;padding:19px 3px;cursor:pointer}.project-btn b{font:800 21px/1 var(--display);letter-spacing:-.04em}.project-btn small{opacity:.55}.project-btn.active{padding-left:12px;background:color-mix(in srgb,currentColor 7%,transparent);border-radius:14px}.story{margin-top:auto;padding-top:42px}.story .q{font:600 clamp(24px,2.4vw,37px)/1.18 var(--display);letter-spacing:-.035em;margin:13px 0 24px}.tags{display:flex;gap:7px;flex-wrap:wrap}.tags span{border:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:7px 10px;border-radius:999px;font-size:11px}.case-link{display:inline-flex;margin-top:30px;font-size:13px;font-weight:700;border-bottom:1px solid;padding-bottom:5px}.interlude{padding:120px 0 60px;text-align:center}.interlude p{font:700 clamp(18px,2vw,28px)/1.25 var(--body);letter-spacing:.04em;text-transform:uppercase;margin:0}.playground{background:#f0d77a;border-radius:56px 56px 0 0;padding:130px 0}.game-shell{border:1px solid rgba(17,17,15,.3);border-radius:28px;overflow:hidden;background:#f7f2dc}.game-top{padding:17px 20px;border-bottom:1px solid rgba(17,17,15,.2);display:flex;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:.08em}.game-world{height:410px;position:relative;overflow:hidden;background:linear-gradient(#f6efd5 0 72%,#d7c674 72%);outline:none}.cloud{position:absolute;width:100px;height:25px;border:2px solid #171714;border-radius:50%;opacity:.12}.cloud.a{left:14%;top:17%}.cloud.b{right:18%;top:27%;transform:scale(.7)}.ground{position:absolute;left:0;right:0;bottom:25%;border-top:2px solid rgba(17,17,15,.45)}.runner{position:absolute;bottom:25%;left:12%;width:70px;height:54px;transform:translateY(2px);transition:left .12s linear}.runner:before{content:'✦';font-size:48px;display:block;transform:rotate(8deg)}.bone{position:absolute;bottom:32%;font-size:23px}.bone.b1{left:35%}.bone.b2{left:61%}.bone.b3{left:83%}.score{position:absolute;right:22px;top:20px;font:800 17px var(--display)}.game-controls{display:flex;justify-content:center;gap:9px;padding:17px}.game-controls button{width:50px;height:44px;border:1px solid rgba(17,17,15,.25);background:#fff8dc;border-radius:999px;cursor:pointer}.game-copy{display:grid;grid-template-columns:1fr 1fr;gap:8vw;margin-top:45px}.game-copy h3{font:800 clamp(30px,4vw,56px)/.95 var(--display);letter-spacing:-.05em;margin:0}.game-copy p{line-height:1.7;color:#655a32;max-width:470px}.archive{background:#11110f;color:#f5f2ea;padding:140px 0 170px}.archive .eyebrow{color:#aaa79e}.archive-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:65px}.archive h2{font:900 clamp(52px,7vw,105px)/.83 var(--display);letter-spacing:-.065em;margin:14px 0 0}.mess{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:12px 17px;cursor:pointer;font-size:11px;font-weight:700}.wall{height:900px;position:relative}.art{position:absolute;overflow:hidden;border-radius:10px;background:#262622;cursor:pointer;transition:left .8s var(--ease),top .8s var(--ease),width .8s var(--ease),height .8s var(--ease),transform .8s var(--ease),opacity .3s}.art img{width:100%;height:100%;object-fit:cover;display:block}.art span{position:absolute;left:12px;bottom:10px;background:rgba(17,17,15,.76);padding:6px 8px;border-radius:999px;font-size:9px;letter-spacing:.08em}.art:hover{z-index:8;transform:scale(1.025)!important}.a1{left:0;top:0;width:28%;height:390px}.a2{left:34%;top:80px;width:20%;height:270px}.a3{right:0;top:0;width:36%;height:300px}.a4{left:13%;top:470px;width:30%;height:300px}.a5{left:49%;top:405px;width:21%;height:360px}.a6{right:0;top:390px;width:24%;height:270px}.wall.messy .a1{left:6%;top:70px;transform:rotate(-6deg)}.wall.messy .a2{left:42%;top:10px;transform:rotate(5deg) scale(1.08)}.wall.messy .a3{right:4%;top:145px;transform:rotate(-3deg)}.wall.messy .a4{left:0;top:505px;transform:rotate(4deg)}.wall.messy .a5{left:38%;top:430px;transform:rotate(-7deg)}.wall.messy .a6{right:8%;top:560px;transform:rotate(6deg) scale(1.1)}.end{padding:150px 0}.end-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:8vw;align-items:end}.end h2{font:900 clamp(52px,7vw,105px)/.86 var(--display);letter-spacing:-.065em;margin:14px 0 0}.end p{font-size:18px;line-height:1.65;color:var(--muted)}.talk{display:inline-block;margin-top:30px;font:800 20px var(--display);border-bottom:2px solid var(--yellow);padding-bottom:5px}.footer{border-top:1px solid var(--line);padding:28px 0 45px;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+@media(max-width:900px){.hero-grid,.section-head,.project-stage,.game-copy,.end-grid{grid-template-columns:1fr}.hero{
+  min-height:auto;
+  padding:8px 0 60px;
+  align-content:start;
+}.paths{grid-template-columns:1fr}.path{border-right:0;border-bottom:1px solid var(--line);padding-left:0!important}.visual{height:60vw;min-height:420px}.project-info{min-height:auto}.story{padding-top:40px}.playground{border-radius:36px 36px 0 0}.wall{height:1050px}.a1{width:46%}.a2{left:53%;width:39%}.a3{top:330px;width:48%}.a4{left:0;top:450px;width:44%}.a5{left:50%;top:520px;width:43%}.a6{top:790px;width:44%}.wall.messy .art{transform:none!important}.archive-head{align-items:flex-start;flex-direction:column}}@media(max-width:600px){.wrap{width:90vw}.navlinks a{padding:8px 10px}.hero h1{font-size:17vw}.section{padding:90px 0}.section-head h2,.archive h2,.end h2{font-size:14vw}.visual{height:430px}.playground{padding:90px 0;border-radius:28px 28px 0 0}.game-world{height:300px}.wall{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}.art,.wall.messy .art{position:relative!important;left:auto!important;right:auto!important;top:auto!important;width:auto!important;height:220px!important;transform:none!important}.art:nth-child(3n){grid-column:1/-1;height:260px!important}.archive{padding:100px 0}.footer{gap:20px;flex-direction:column}}
+  </style>
+  <style id="playground-gallery-v2">
+   .play-stage{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(290px,.65fr);gap:4vw;align-items:stretch}.game-showcase{min-width:0}.game-media{height:560px;position:relative;overflow:hidden;background:#0b1020;transition:background .55s var(--ease)}.game-media video{width:100%;height:100%;object-fit:contain;display:none;background:inherit}.game-media.has-video video{display:block}.game-media.has-video .game-fallback{display:none}.game-fallback{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px;position:relative;overflow:hidden}.game-fallback:before{content:'';position:absolute;width:340px;height:340px;border:1px solid currentColor;border-radius:50%;opacity:.12;transform:translate(32%,-22%)}.fallback-no{position:absolute;left:25px;top:22px;font:700 11px var(--body);letter-spacing:.12em}.fallback-art{font:900 clamp(52px,7vw,108px)/.76 var(--display);letter-spacing:-.075em;position:relative}.fallback-note{position:absolute;bottom:22px;font:600 10px var(--body);letter-spacing:.09em;opacity:.62}.media-badge{position:absolute;left:20px;bottom:20px;background:rgba(247,246,242,.9);color:#11110f;border-radius:999px;padding:9px 12px;font-size:9px;font-weight:700;letter-spacing:.08em}.theme-battle{background:#09101e;color:#ffd65a}.theme-bunny{background:#f4d7e4;color:#6c4861}.theme-blokki{background:#fff3e4;color:#2d1a0e}.theme-match{background:#120f1f;color:#c4a1ff}.game-detail{border-top:1px solid rgba(17,17,15,.28);padding-top:20px;display:flex;flex-direction:column;min-width:0}.game-detail h3{font:900 clamp(35px,4.4vw,68px)/.88 var(--display);letter-spacing:-.06em;margin:14px 0 20px}.game-detail>p{line-height:1.7;color:#655a32;margin:0 0 24px}.game-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:28px}.play-btn,.process-btn{border:1px solid rgba(17,17,15,.28);border-radius:999px;padding:12px 15px;font-size:11px;font-weight:700;background:#fff8dc;color:#171714;cursor:pointer}.play-btn{background:#171714;color:#fff}.process-panel{display:none;margin-top:22px;padding:20px 0;border-top:1px solid rgba(17,17,15,.22);font-size:12px;line-height:1.65}.process-panel.open{display:block}.process-panel b{font-size:10px;letter-spacing:.12em}.process-panel p{margin:7px 0 17px;color:#655a32}.game-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px;border-top:1px solid rgba(17,17,15,.28)}.game-tab{appearance:none;border:0;border-right:1px solid rgba(17,17,15,.2);background:transparent;text-align:left;padding:20px 18px 22px 0;color:#171714;cursor:pointer;transition:.3s var(--ease)}.game-tab+ .game-tab{padding-left:18px}.game-tab:last-child{border-right:0}.game-tab span{font-size:10px;opacity:.5;display:block;margin-bottom:20px}.game-tab b{display:block;font:800 17px/1 var(--display);letter-spacing:-.035em}.game-tab small{display:block;margin-top:7px;opacity:.55}.game-tab.active{background:rgba(255,255,255,.28);padding-top:14px;border-radius:0 0 14px 14px}.game-tab.active:before{content:'';display:block;height:5px;background:#171714;margin:-14px 0 14px;border-radius:0 0 5px 5px}.game-tab:focus-visible,.process-btn:focus-visible,.play-btn:focus-visible{outline:2px solid #171714;outline-offset:3px}@media(max-width:900px){.play-stage{grid-template-columns:1fr}.game-media{height:520px}.game-detail{margin-top:10px}.game-strip{grid-template-columns:1fr 1fr}.game-tab:nth-child(2){border-right:0}.game-tab:nth-child(-n+2){border-bottom:1px solid rgba(17,17,15,.2)}}@media(max-width:600px){.game-media{height:390px}.game-strip{grid-template-columns:1fr}.game-tab,.game-tab+ .game-tab{padding:17px 0;border-right:0;border-bottom:1px solid rgba(17,17,15,.2)}.game-tab span{margin-bottom:8px}.media-badge{font-size:8px}.fallback-art{font-size:15vw}}
+  </style>
+ 
+<style id="index-topbar-exact">
+/* Exact top-bar system from index.html */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.logo {
+  color: #171714;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  text-decoration: none;
+  z-index: 101;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  z-index: 101;
+}
+
+.nav-links .nav-item {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: .65rem 1.15rem;
+  border: 1px solid rgba(27,24,20,.22);
+  border-radius: 999px;
+  color: #171714;
+  background: transparent;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: .8;
+  transition: all .3s ease;
+}
+
+.nav-links .nav-item.active,
+.nav-links .nav-item:first-child {
+  background: #F2B928;
+  border-color: #F2B928;
+}
+
+.nav-links .nav-item:hover {
+  color: #F2B928;
+  background: transparent;
+  border-color: #F2B928;
+  opacity: 1;
+}
+
+.nav-links .nav-item.active:hover {
+  color: #171714;
+  background: #F2B928;
+}
+
+.hamburger {
+  display: none;
+  width: 30px;
+  height: 24px;
+  padding: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 102;
+}
+
+.bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #171714;
+  border-radius: 10px;
+  transition: all .3s ease;
+}
+
+.hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px,6px); }
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px,-6px); }
+
+/* Header is absolute on index, so reserve the same visual space here. */
+main { padding-top: 112px; }
+
+@media (max-width: 600px) {
+  .top-bar { padding: 25px 5vw; }
+  .logo { font-size: 1.2rem; }
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background: #F3F0E8;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+    backdrop-filter: blur(5px);
+    z-index: 100;
+  }
+  .nav-links.active { opacity: 1; pointer-events: auto; }
+  .nav-links .nav-item {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent !important;
+    font-size: 2rem;
+    font-weight: 700;
+    opacity: .8;
+  }
+  .nav-links .nav-item:hover,
+  .nav-links .nav-item.active:hover {
+    color: #F2B928;
+    transform: scale(1.05);
+  }
+  main { padding-top: 82px; }
+}
+</style>
+
+<style id="screenshot-header-exact">
+.portfolio-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 142px;
+  padding: 34px 5vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  z-index: 1000;
+  font-family: 'DM Sans', sans-serif;
+}
+.header-identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-top: 13px;
+  white-space: nowrap;
+}
+.header-logo {
+  color: #171714;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  text-decoration: none;
+}
+.header-role {
+  color: #69675f;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px;
+  border: 1px solid rgba(17,17,15,.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 10px 28px rgba(17,17,15,.055);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.header-link {
+  min-width: 86px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  color: #4f4e49;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .035em;
+  text-align: center;
+  text-decoration: none;
+  transition: background .25s ease, color .25s ease;
+}
+.header-link.active {
+  background: #efc75f;
+  color: #4a463c;
+}
+.header-link:not(.active):hover {
+  background: rgba(17,17,15,.055);
+  color: #171714;
+}
+.header-menu { display: none; }
+main { padding-top: 142px !important; }
+@media (max-width: 760px) {
+  .portfolio-header { min-height: 92px; padding: 24px 5vw; align-items: center; }
+  .header-identity { padding-top: 0; gap: 12px; }
+  .header-logo { font-size: 17px; }
+  .header-role { font-size: 8px; }
+  .header-menu {
+    display: flex; width: 30px; height: 22px; padding: 0; border: 0; background: transparent;
+    flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1002;
+  }
+  .header-menu span { width: 100%; height: 2px; border-radius: 9px; background: #171714; transition: .3s ease; }
+  .header-menu.active span:nth-child(1) { transform: rotate(45deg) translate(7px,7px); }
+  .header-menu.active span:nth-child(2) { opacity: 0; }
+  .header-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+  .header-nav {
+    position: fixed; inset: 0; border: 0; border-radius: 0; background: #f7f6f2; box-shadow: none;
+    display: flex; flex-direction: column; justify-content: center; gap: 18px; opacity: 0; pointer-events: none;
+    transition: opacity .3s ease; z-index: 1001;
+  }
+  .header-nav.active { opacity: 1; pointer-events: auto; }
+  .header-link { min-width: 0; padding: 12px 24px; font-size: 28px; }
+  .header-link.active { background: #efc75f; }
+  main { padding-top: 92px !important; }
+}
+@media (max-width: 430px) { .header-role { display: none; } }
+</style>
+
+<style id="index-work-page-transition">
+.page-transition{position:fixed;inset:0;z-index:2000000;pointer-events:none;visibility:hidden;overflow:hidden}
+.page-transition__shape{position:absolute;background:#F2B928;left:var(--pt-left,50vw);top:var(--pt-top,50vh);width:var(--pt-width,80px);height:var(--pt-height,42px);border-radius:999px;transform:translate(-50%,-50%);transition:left .68s cubic-bezier(.76,0,.24,1),top .68s cubic-bezier(.76,0,.24,1),width .68s cubic-bezier(.76,0,.24,1),height .68s cubic-bezier(.76,0,.24,1),border-radius .68s cubic-bezier(.76,0,.24,1)}
+.page-transition__label{position:absolute;inset:0;display:grid;place-items:center;color:#171714;font:700 11px/1 'Space Grotesk',sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:0;transition:opacity .18s ease .34s}
+.page-transition.is-active{visibility:visible;pointer-events:auto}
+.page-transition.is-active .page-transition__shape{left:50vw;top:50vh;width:145vmax;height:145vmax;border-radius:22%}
+.page-transition.is-active .page-transition__label{opacity:1}
+.page-transition.is-entering{visibility:visible;pointer-events:auto;background:#F2B928}
+.page-transition.is-entering .page-transition__shape{left:50vw;top:50vh;width:145vmax;height:145vmax;border-radius:0}
+.page-transition.is-entering .page-transition__label{opacity:0}
+.page-transition.is-revealing{visibility:visible;pointer-events:none}
+.page-transition.is-revealing .page-transition__shape{left:50vw;top:-35vh;width:115vw;height:70vh;border-radius:0 0 50% 50%}
+.page-transition.is-revealing .page-transition__label{opacity:0}
+body.pt-lock{overflow:hidden!important}
+body.pt-work-enter .hero-grid>*{opacity:0;transform:translateY(22px)}
+body.pt-work-enter .paths{opacity:0;transform:translateY(18px)}
+body.pt-work-ready .hero-grid>*{opacity:1;transform:none;transition:opacity .55s ease,transform .65s cubic-bezier(.16,1,.3,1)}
+body.pt-work-ready .hero-grid>*:nth-child(2){transition-delay:.08s}
+body.pt-work-ready .paths{opacity:1;transform:none;transition:opacity .55s ease .16s,transform .65s cubic-bezier(.16,1,.3,1) .16s}
+@media(prefers-reduced-motion:reduce){.page-transition{display:none!important}body.pt-work-enter .hero-grid>*,body.pt-work-enter .paths{opacity:1!important;transform:none!important}}
+</style>
+</head>
+ <body>
+<div class="page-transition" id="pageTransition" aria-hidden="true"><div class="page-transition__shape"></div><div class="page-transition__label">INDEX / 01 &nbsp;→&nbsp; WORK / 02</div></div>
+
+  <header class="portfolio-header">
+  <div class="header-identity">
+    <a href="index.html" class="header-logo" aria-label="Home">eeshitvaa.design</a>
+    <span class="header-role">/ PRODUCT DESIGN</span>
+  </div>
+
+  <button class="header-menu" type="button" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="header-nav" aria-label="Primary navigation">
+    <a href="work.html" class="header-link active">WORK</a>
+    <a href="about.html" class="header-link">ABOUT</a>
+    <a href="contact.html" class="header-link">CONTACT</a>
+  </nav>
+</header>
+  <main>
+   <section class="wrap hero">
+    <div class="hero-grid">
+     <div>
+      <div class="eyebrow">
+       02 / WORK
+      </div>
+      <h1>
+       I DON'T REALLY MAKE ONE KIND OF THING.
+      </h1>
+     </div>
+     <p class="hero-copy">
+      Product experiences, strange little games, and visual experiments.
+      <span class="hand">
+       pick a rabbit hole &darr;
+      </span>
+     </p>
+    </div>
+    <div class="paths">
+     <a class="path" href="#product">
+      <small>
+       01
+      </small>
+      <strong>
+       I SOLVE
+      </strong>
+      <span>
+       UI / UX + PRODUCT
+      </span>
+     </a>
+     <a class="path" href="#play">
+      <small>
+       02
+      </small>
+      <strong>
+       I PLAY
+      </strong>
+      <span>
+       AI + GAMES
+      </span>
+     </a>
+     <a class="path" href="#archive">
+      <small>
+       03
+      </small>
+      <strong>
+       I MAKE
+      </strong>
+      <span>
+       GRAPHIC + VISUAL
+      </span>
+     </a>
+    </div>
+   </section>
+   <section class="product section" id="product">
+    <div class="wrap">
+     <div class="section-head">
+      <div>
+       <div class="eyebrow">
+        01 / PRODUCT
+       </div>
+       <h2>
+        PROBLEMS I COULDN'T LEAVE ALONE.
+       </h2>
+      </div>
+      <p>
+       Four projects built around questions that kept bothering me. Research, interaction, systems, and the messy decisions in between.
+      </p>
+     </div>
+     <div class="project-stage">
+      <a class="visual" href="careerexpo.html" id="projectVisual">
+       <img alt="Sandbox project" id="projectImg" src="careerexpo1.jpg"/>
+       <span class="index" id="projectIndex">
+        01
+       </span>
+       <span class="view">
+        VIEW CASE STUDY &nearrow;
+       </span>
+      </a>
+      <div class="project-info">
+       <div class="project-list">
+        <button class="project-btn active" data-i="0">
+         <small>
+          01
+         </small>
+         <b>
+          SANDBOX
+         </b>
+         <small>
+          PRODUCT
+         </small>
+        </button>
+        <button class="project-btn" data-i="1">
+         <small>
+          02
+         </small>
+         <b>
+          STYLEPRISM
+         </b>
+         <small>
+          FASHION
+         </small>
+        </button>
+        <button class="project-btn" data-i="2">
+         <small>
+          03
+         </small>
+         <b>
+          VISIONEASE
+         </b>
+         <small>
+          ACCESSIBILITY
+         </small>
+        </button>
+        <button class="project-btn" data-i="3">
+         <small>
+          04
+         </small>
+         <b>
+          SONY ALPHA
+         </b>
+         <small>
+          CAMERA UI
+         </small>
+        </button>
+       </div>
+       <div class="story">
+        <div class="eyebrow">
+         THE QUESTION
+        </div>
+        <div class="q" id="projectQuestion">
+        </div>
+        <div class="tags" id="projectTags">
+        </div>
+        <a class="case-link" href="careerexpo.html" id="projectLink">
+         Walk through my thinking &nearrow;
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <div class="wrap interlude">
+    <p>
+     okay. sometimes I stop solving problems.
+    </p>
+   </div>
+   <section class="playground" id="play">
+    <div class="wrap">
+     <div class="section-head">
+      <div>
+       <div class="eyebrow">
+        02 / PLAYGROUND
+       </div>
+       <h2>
+        I MAKE THINGS JUST TO SEE IF THEY'LL WORK.
+       </h2>
+      </div>
+      <p>
+       AI-assisted game experiments where I explored mechanics, interaction, visual direction and the strange fun of turning an idea into something playable.
+      </p>
+     </div>
+     <div class="play-stage">
+      <div class="game-shell game-showcase">
+       <div class="game-top">
+        <span id="gameKicker">
+         EXPERIMENT 01 / BATTLE CARD CLASH
+        </span>
+        <span>
+         AUTOPLAY PREVIEW
+        </span>
+       </div>
+       <div class="game-media theme-battle" id="gameMedia">
+        <video id="gameVideo" loop="" muted="" playsinline="" preload="metadata">
+        </video>
+        <div class="game-fallback" id="gameFallback">
+         <div class="fallback-no">
+          01
+         </div>
+         <div class="fallback-art">
+          BATTLE
+          <br/>
+          CARD
+          <br/>
+          CLASH
+         </div>
+         <div class="fallback-note">
+          ADD RECORDING &rarr; battle-card-clash.mp4
+         </div>
+        </div>
+        <div class="media-badge">
+         AI-ASSISTED GAME EXPERIMENT
+        </div>
+       </div>
+      </div>
+      <aside class="game-detail">
+       <div class="eyebrow">
+        CURRENTLY PLAYING
+       </div>
+       <h3 id="gameTitle">
+        BATTLE CARD CLASH
+       </h3>
+       <p id="gameDesc">
+        Memory mechanics meet turn-based combat. Match cards, build attacks and survive increasingly tense battles.
+       </p>
+       <div class="tags" id="gameTags">
+        <span>
+         Game design
+        </span>
+        <span>
+         Interaction
+        </span>
+        <span>
+         Systems
+        </span>
+       </div>
+       <div class="game-actions">
+        <a class="play-btn" href="battle-card-clash.html" id="playGame" rel="noopener" target="_blank">
+         PLAY IT &nearrow;
+        </a>
+        <button aria-expanded="false" class="process-btn" id="processToggle" type="button">
+         HOW I MADE IT +
+        </button>
+       </div>
+       <div class="process-panel" id="processPanel">
+        <b>
+         MY ROLE
+        </b>
+        <p>
+         Concept &middot; Game mechanics &middot; Interaction design &middot; Visual direction &middot; Prompt iteration &middot; Testing + refinement
+        </p>
+        <b>
+         BUILD
+        </b>
+        <p id="gameBuild">
+         AI-assisted coding &middot; HTML / CSS / JavaScript
+        </p>
+       </div>
+      </aside>
+     </div>
+     <div aria-label="Game experiments" class="game-strip" role="tablist">
+      <button class="game-tab active" data-game="0" type="button">
+       <span>
+        01
+       </span>
+       <b>
+        BATTLE CARD CLASH
+       </b>
+       <small>
+        Memory &times; combat
+       </small>
+      </button>
+      <button class="game-tab" data-game="1" type="button">
+       <span>
+        02
+       </span>
+       <b>
+        BUNNY DASH
+       </b>
+       <small>
+        3D endless runner
+       </small>
+      </button>
+      <button class="game-tab" data-game="2" type="button">
+       <span>
+        03
+       </span>
+       <b>
+        BLOKKI
+       </b>
+       <small>
+        Block puzzle
+       </small>
+      </button>
+      <button class="game-tab" data-game="3" type="button">
+       <span>
+        04
+       </span>
+       <b>
+        MATCH CARDS
+       </b>
+       <small>
+        Memory game
+       </small>
+      </button>
+     </div>
+    </div>
+   </section>
+   <section class="archive" id="archive">
+    <div class="wrap">
+     <div class="archive-head">
+      <div>
+       <div class="eyebrow">
+        03 / GRAPHIC ARCHIVE
+       </div>
+       <h2>
+        THE VISUAL DUMP.
+       </h2>
+      </div>
+      <button class="mess" id="mess">
+       MAKE A MESS &nearrow;
+      </button>
+     </div>
+     <div class="wall" id="wall">
+      <div class="art a1">
+       <img alt="Graphic design placeholder" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&amp;fit=crop&amp;w=900&amp;q=80"/>
+       <span>
+        POSTER / 01
+       </span>
+      </div>
+      <div class="art a2">
+       <img alt="Graphic design placeholder" src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&amp;fit=crop&amp;w=700&amp;q=80"/>
+       <span>
+        TYPE / 02
+       </span>
+      </div>
+      <div class="art a3">
+       <img alt="Graphic design placeholder" src="https://images.unsplash.com/photo-1561070791-36c11767b26a?auto=format&amp;fit=crop&amp;w=900&amp;q=80"/>
+       <span>
+        IDENTITY / 03
+       </span>
+      </div>
+      <div class="art a4">
+       <img alt="Graphic design placeholder" src="https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+       <span>
+        EDITORIAL / 04
+       </span>
+      </div>
+      <div class="art a5">
+       <img alt="Graphic design placeholder" src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&amp;fit=crop&amp;w=700&amp;q=80"/>
+       <span>
+        EXPERIMENT / 05
+       </span>
+      </div>
+      <div class="art a6">
+       <img alt="Graphic design placeholder" src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+       <span>
+        VISUAL / 06
+       </span>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="wrap end">
+    <div class="end-grid">
+     <div>
+      <div class="eyebrow">
+       04 / THAT'S MOST OF IT
+      </div>
+      <h2>
+       THREE WAYS I THINK WITH MY HANDS.
+      </h2>
+     </div>
+     <div>
+      <p>
+       <b>
+        PRODUCT
+       </b>
+       &mdash; figuring out why something isn't working.
+       <br/>
+       <br/>
+       <b>
+        PLAY
+       </b>
+       &mdash; finding out what happens if I try something weird.
+       <br/>
+       <br/>
+       <b>
+        VISUAL
+       </b>
+       &mdash; sometimes I just want to make something look good.
+       <br/>
+       <br/>
+       <span class="hand">
+        unfortunately, I'm interested in all three.
+       </span>
+      </p>
+      <a class="talk" href="contact.html">
+       LET'S TALK &nearrow;
+      </a>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="wrap footer">
+   <span>
+    eeshitvaa.design
+   </span>
+   <span>
+    Made with curiosity, revisions, and too many open tabs.
+   </span>
+  </footer>
+  <script>
+   const projects=[{name:'Sandbox',img:'careerexpo1.jpg',href:'careerexpo.html',bg:'#e6bb3f',ink:'#171714',q:"Why does choosing a career feel so overwhelming when you're only just starting to figure yourself out?",tags:['Research','Product strategy','UI/UX'],link:'Walk through my thinking ↗'},{name:'StylePrism',img:'work-image-1.png',href:'style.html',bg:'#896b59',ink:'#faf5ec',q:'Why do we own so many clothes and still feel like we have nothing to wear?',tags:['Interaction','Visual system','Prototype'],link:'See how it evolved ↗'},{name:'VisionEase',img:'work-image-2.png',href:'visionease.html',bg:'#49345e',ink:'#faf7ff',q:'Why should someone have to dig through settings just to make a screen comfortable to use?',tags:['Accessibility','Research','Interaction'],link:'Explore the accessible experience ↗'},{name:'Sony Alpha',img:'work-image-3.png',href:'sony.html',bg:'#151515',ink:'#f5f3ee',q:"What happens when the shot is ready but you're still searching for the right setting?",tags:['Information architecture','Camera UI','Interaction'],link:'See the interface rethink ↗'}];const section=document.querySelector('.product'),img=document.querySelector('#projectImg'),visual=document.querySelector('#projectVisual'),idx=document.querySelector('#projectIndex'),q=document.querySelector('#projectQuestion'),tags=document.querySelector('#projectTags'),link=document.querySelector('#projectLink'),btns=[...document.querySelectorAll('.project-btn')];function select(i){const p=projects[i];btns.forEach((b,n)=>b.classList.toggle('active',n===i));img.style.opacity=0;setTimeout(()=>{img.src=p.img;img.alt=p.name+' project';img.style.opacity=1},170);visual.href=p.href;idx.textContent=String(i+1).padStart(2,'0');q.textContent=p.q;tags.innerHTML=p.tags.map(t=>`<span>${t}</span>`).join('');link.href=p.href;link.textContent=p.link;section.style.background=p.bg;section.style.color=p.ink}btns.forEach((b,i)=>{b.addEventListener('click',()=>select(i));b.addEventListener('mouseenter',()=>select(i))});select(0);
+let x=12,score=0;const runner=document.querySelector('#runner'),scoreEl=document.querySelector('#score'),world=document.querySelector('.game-world');function move(d){x=Math.max(3,Math.min(88,x+d));runner.style.left=x+'%';score+=1;scoreEl.textContent=String(score).padStart(3,'0')}document.querySelector('#left').addEventListener('click',()=>move(-5));document.querySelector('#right').addEventListener('click',()=>move(5));world.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-5)}if(e.key==='ArrowRight'){e.preventDefault();move(5)}});const wall=document.querySelector('#wall'),mess=document.querySelector('#mess');mess.addEventListener('click',()=>{const on=wall.classList.toggle('messy');mess.textContent=on?'OKAY, FIX IT.':'MAKE A MESS ↗'});
+  </script>
+  <script id="playground-gallery-v2-script">
+   (()=>{const games=[{title:'BATTLE CARD CLASH',kicker:'EXPERIMENT 01 / BATTLE CARD CLASH',desc:'Memory mechanics meet turn-based combat. Match cards, build attacks and survive increasingly tense battles.',tags:['Game design','Interaction','Systems'],video:'battle-card-clash.mp4',href:'battle-card-clash.html',theme:'theme-battle',build:'AI-assisted coding · HTML / CSS / JavaScript'},{title:'BUNNY DASH',kicker:'EXPERIMENT 02 / BUNNY DASH',desc:'A pastel 3D endless runner built around quick lane changes, jumping, sliding, obstacles, coins and score chasing.',tags:['3D interaction','Game mechanics','Motion'],video:'bunny-dash.mp4',href:'bunny-dash.html',theme:'theme-bunny',build:'AI-assisted coding · Three.js · HTML / CSS / JavaScript'},{title:'BLOKKI',kicker:'EXPERIMENT 03 / BLOKKI',desc:'A tactile block puzzle about dragging shapes, reading space, completing lines and chasing satisfying combos.',tags:['Puzzle design','Drag interaction','Feedback'],video:'blokki.mp4',href:'blokki.html',theme:'theme-blokki',build:'AI-assisted coding · HTML / CSS / JavaScript'},{title:'MATCH CARDS',kicker:'EXPERIMENT 04 / MATCH CARDS',desc:'A fast memory game using card flips, timing, scoring, sound and particle feedback to make a simple loop feel satisfying.',tags:['Memory game','Motion','Audio feedback'],video:'match-cards.mp4',href:'match-cards.html',theme:'theme-match',build:'AI-assisted coding · Web Audio · HTML / CSS / JavaScript'}];const tabs=[...document.querySelectorAll('.game-tab')],media=document.querySelector('#gameMedia'),video=document.querySelector('#gameVideo'),fallback=document.querySelector('#gameFallback'),title=document.querySelector('#gameTitle'),desc=document.querySelector('#gameDesc'),tags=document.querySelector('#gameTags'),play=document.querySelector('#playGame'),kicker=document.querySelector('#gameKicker'),build=document.querySelector('#gameBuild'),toggle=document.querySelector('#processToggle'),panel=document.querySelector('#processPanel');if(!media)return;function select(i){const g=games[i];tabs.forEach((t,n)=>t.classList.toggle('active',n===i));media.className='game-media '+g.theme;title.textContent=g.title;desc.textContent=g.desc;kicker.textContent=g.kicker;tags.innerHTML=g.tags.map(x=>'<span>'+x+'</span>').join('');play.href=g.href;build.textContent=g.build;fallback.querySelector('.fallback-no').textContent=String(i+1).padStart(2,'0');fallback.querySelector('.fallback-art').innerHTML=g.title.replaceAll(' ','<br>');fallback.querySelector('.fallback-note').textContent='ADD RECORDING → '+g.video;media.classList.remove('has-video');video.pause();video.removeAttribute('src');video.load();video.src=g.video;video.oncanplay=()=>{media.classList.add('has-video');video.play().catch(()=>{})};video.onerror=()=>media.classList.remove('has-video');video.load()}tabs.forEach((t,i)=>t.addEventListener('click',()=>select(i)));toggle.addEventListener('click',()=>{const open=panel.classList.toggle('open');toggle.setAttribute('aria-expanded',open);toggle.textContent=open?'HOW I MADE IT −':'HOW I MADE IT +'});select(0)})();
+  </script>
+ 
+<script id="index-topbar-menu">
+const topbarHamburger = document.querySelector('.hamburger');
+const topbarNavLinks = document.querySelector('.nav-links');
+
+if (topbarHamburger && topbarNavLinks) {
+  topbarHamburger.addEventListener('click', () => {
+    const isOpen = topbarHamburger.classList.toggle('active');
+    topbarNavLinks.classList.toggle('active', isOpen);
+    topbarHamburger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  topbarNavLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      topbarHamburger.classList.remove('active');
+      topbarNavLinks.classList.remove('active');
+      topbarHamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+</script>
+
+<script id="screenshot-header-script">
+const headerMenu = document.querySelector('.header-menu');
+const headerNav = document.querySelector('.header-nav');
+if (headerMenu && headerNav) {
+  headerMenu.addEventListener('click', () => {
+    const open = headerNav.classList.toggle('active');
+    headerMenu.classList.toggle('active', open);
+    headerMenu.setAttribute('aria-expanded', String(open));
+  });
+  headerNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      headerNav.classList.remove('active');
+      headerMenu.classList.remove('active');
+      headerMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+</script>
+
+<script id="work-page-transition-script">
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const overlay = document.querySelector('#pageTransition');
+  const homeLink = document.querySelector('.header-logo[href="index.html"]');
+
+  /* Keep the Index -> Work reveal animation. */
+  if (overlay) {
+    const incoming = sessionStorage.getItem('eeshitvaaTransition');
+
+    if (incoming === 'to-work' && !reduceMotion) {
+      sessionStorage.removeItem('eeshitvaaTransition');
+      document.body.classList.add('pt-lock', 'pt-work-enter');
+      overlay.classList.add('is-entering');
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          overlay.classList.remove('is-entering');
+          overlay.classList.add('is-revealing');
+          document.body.classList.add('pt-work-ready');
+
+          setTimeout(() => {
+            overlay.classList.remove('is-revealing');
+            document.body.classList.remove('pt-lock', 'pt-work-enter');
+          }, 720);
+        });
+      });
+    } else {
+      document.body.classList.add('pt-work-ready');
+    }
+  }
+
+  /* Work -> Index: NO transition. Also skip the homepage intro once. */
+  if (homeLink) {
+    homeLink.addEventListener('click', (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      event.preventDefault();
+      sessionStorage.removeItem('eeshitvaaTransition');
+      sessionStorage.setItem('eeshitvaaReturnHome', '1');
+      window.location.href = 'index.html';
+    });
+  }
+})();
+</script>
+</body>
+</html>
+<style id="compact-work-override">
+ /* Compact work-page pass */
+.hero{min-height:auto!important;padding:56px 0 72px!important}.hero h1{font-size:clamp(48px,6.5vw,98px)!important;max-width:11ch!important;line-height:.86!important}.hero-grid{gap:6vw!important}.hero-copy{font-size:15px!important;max-width:390px!important}.paths{margin-top:48px!important}.path{padding-top:19px!important;padding-bottom:19px!important}.path strong{font-size:clamp(20px,1.9vw,30px)!important}.section{padding:82px 0!important}.section-head{margin-bottom:42px!important;gap:6vw!important}.section-head h2{font-size:clamp(40px,4.8vw,72px)!important;line-height:.9!important;max-width:11ch!important}.section-head p{font-size:14px!important;line-height:1.6!important}.product{padding-top:78px!important}.project-stage{gap:3.5vw!important;grid-template-columns:minmax(0,1.7fr) minmax(280px,.68fr)!important}.visual{height:min(48vw,540px)!important;max-height:540px!important;border-radius:22px!important}.project-info{min-height:500px!important}.project-btn{padding:14px 3px!important}.project-btn b{font-size:18px!important}.story{padding-top:28px!important}.story .q{font-size:clamp(21px,1.9vw,30px)!important;margin:10px 0 18px!important}.case-link{margin-top:22px!important}.interlude{padding:68px 0 34px!important}.interlude p{font-size:clamp(25px,3vw,44px)!important}.playground{padding:82px 0 88px!important;border-radius:42px 42px 0 0!important}.playground .section-head{margin-bottom:38px!important}.playground .section-head h2{font-size:clamp(38px,4.4vw,66px)!important}.play-stage{gap:3.5vw!important}.game-media{min-height:360px!important}.game-detail h3{font-size:clamp(30px,3.4vw,48px)!important}.game-detail p{font-size:14px!important}.game-strip{margin-top:22px!important}.game-tab{padding:15px 12px!important;min-height:82px!important}.game-tab b{font-size:13px!important}.game-tab small{font-size:10px!important}
+/* Graphics is a doorway, not a second portfolio on this page. */
+.archive{background:#11110f!important;color:#f5f2ea!important;padding:72px 0!important}.archive .archive-head{display:none!important}.archive .wall{height:auto!important;display:block!important}.archive .art{display:none!important}.archive .wrap:before{content:'03 / VISUAL ARCHIVE';display:block;font-size:11px;font-weight:700;letter-spacing:.13em;color:#aaa79e;margin-bottom:18px}.archive .wall:before{content:'GRAPHIC WORK';display:block;font:900 clamp(38px,5vw,74px)/.9 var(--display);letter-spacing:-.055em;max-width:7ch}.archive .wall:after{content:'Posters, identities, editorial experiments and the visual things that do not belong inside a UX case study.   OPEN ARCHIVE ↗';display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-top:28px;padding:28px 0 4px;border-top:1px solid rgba(255,255,255,.22);font-size:14px;line-height:1.55;color:#c9c6bd;white-space:pre-wrap}.archive{cursor:pointer}.archive:hover .wall:before{text-decoration:underline;text-decoration-color:#e7b62f;text-decoration-thickness:4px;text-underline-offset:8px}.end{padding:86px 0!important}.end h2{font-size:clamp(42px,5.5vw,78px)!important}.end p{font-size:16px!important}.footer{padding-bottom:30px!important}
+@media(max-width:900px){.hero{padding:50px 0 64px!important}.project-stage{grid-template-columns:1fr!important}.visual{height:55vw!important;min-height:360px!important}.project-info{min-height:auto!important}.play-stage{grid-template-columns:1fr!important}.game-media{min-height:390px!important}.archive .wall:after{display:block!important}.end{padding:72px 0!important}}
+@media(max-width:600px){.hero{padding:36px 0 52px!important}.hero h1{font-size:14.5vw!important}.paths{margin-top:34px!important}.section{padding:62px 0!important}.section-head{margin-bottom:30px!important}.section-head h2{font-size:12vw!important}.visual{height:390px!important;min-height:0!important}.playground{padding:62px 0 68px!important;border-radius:28px 28px 0 0!important}.game-media{min-height:300px!important}.archive{padding:58px 0!important}.archive .wall:before{font-size:12vw!important}.archive .wall:after{font-size:13px!important;margin-top:22px!important;padding-top:22px!important}.end{padding:64px 0!important}}
+</style>
+<script id="compact-archive-link">
+ (()=>{const a=document.querySelector('#archive');if(!a)return;a.setAttribute('role','link');a.setAttribute('tabindex','0');a.setAttribute('aria-label','Open graphic design archive');const go=()=>location.href='graphics.html';a.addEventListener('click',go);a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})})();
+</script>
