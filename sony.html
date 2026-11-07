@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#F6F6F2" name="theme-color"/>
+<meta content="An independent Sony Alpha interface redesign, documenting the evidence, four original design proposals and a working camera-menu study." name="description"/>
+<title>Sony Alpha — Interface Case Study | Evidence Refinement</title>
+<style>/* SONY ALPHA V25 — editorial proportions
+   One shared 12-column canvas, no added visual system or product changes.
+   Desktop: 192px rail; content 1032px inside a 1200px padded canvas.
+   Tablet: 6 columns. Mobile: 4 columns. */
+.display-italic{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;letter-spacing:-.025em}
+:root{--hero-type:clamp(54px,5.9vw,84px);--chapter-type:clamp(36px,3.65vw,54px);--solution-type:clamp(25px,2.5vw,33px);--space-compact:24px;--space-standard:56px;--space-editorial:112px;--image-editorial:430px;--image-research:330px;--image-featured:440px;--paper:#F6F6F2;--ink:#151515;--grey:#929292;--body:#414141;--muted:#686868;--line:#D4D4D0;--light:#E8E8E3;--surface:#EFEFEB;--unit:8px;--gutter:24px;--rail:192px;--content:1032px;--columns:12;--grid:repeat(var(--columns),minmax(0,1fr));--canvas-outer:1200px;--editorial-left:56px;--editorial-right:112px;--image-hero:420px;--span-hero:9;--span-research:8;--span-support:7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body.viewing-image{overflow:hidden}
+a{color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer}
+h1,h2,h3,h4,p,figure,blockquote{margin:0}
+h1,h2,h3,h4{font-weight:700;line-height:1.12;letter-spacing:-.035em}
+em{font-family:inherit;font-weight:inherit;font-style:italic}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.skip{position:fixed;z-index:200;top:-90px;left:12px;background:var(--paper);padding:10px 14px}
+.skip:focus{top:12px}
+.shell{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);max-width:1670px;margin:auto}
+.rail{min-width:0;border-right:1px solid var(--line)}
+.rail-inner{position:sticky;top:0;min-height:100dvh;display:flex;flex-direction:column;padding:36px 16px 24px 20px}
+.wordmark{font-weight:800;font-size:19px;line-height:1;letter-spacing:-.07em;white-space:nowrap;text-decoration:none}
+.wordmark span{font-size:23px;font-weight:400}
+.wordmark small{display:block;margin-top:13px;font-size:10px;letter-spacing:.13em;font-weight:600;color:var(--muted)}
+.rail-nav-wrap{margin-top:96px}
+.rail-label{margin-bottom:16px;color:var(--grey)}
+.rail-nav{display:grid;gap:2px}
+.rail-nav a{display:flex;align-items:center;gap:14px;padding:12px 0 12px 12px;border-left:2px solid transparent;text-decoration:none;font-size:13px;line-height:1.35;color:#5A5A5A}
+.rail-nav a span{font-size:11px;color:#777;min-width:17px;font-variant-numeric:tabular-nums}
+.rail-nav a:hover,.rail-nav a.current{color:var(--ink)}
+.rail-nav a.current{font-weight:700;border-left-color:var(--ink)}
+.rail-bottom{margin-top:auto;font-size:10px;letter-spacing:.06em;line-height:1.65;color:var(--muted)}
+.read-progress{height:2px;background:var(--line);margin-bottom:16px}
+.read-progress span{height:100%;width:0;background:var(--ink);display:block}
+.page{min-width:0;width:100%;max-width:var(--canvas-outer);padding:0 var(--editorial-right) 0 var(--editorial-left);margin:0 auto 0 0}
+.chapter>*{min-width:0;grid-column:1/-1}
+.chapter.intro{padding-top:40px;border-top:0}
+.chapter-number{font-size:12px;letter-spacing:.15em;color:var(--muted);font-weight:700;margin-bottom:40px}
+.chapter-number span{margin:0 8px;color:var(--grey)}
+.kicker,.overline,.rail-label,.snapshot span,.solution-tag,.ps-label,.matched-label,.solution-number small,.research-entry-header>span,.strategy-index,.format-explainer b,.format-depth-copy .overline{font-size:11px;line-height:1.55;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+.overline{display:block}
+.chapter-next{display:flex;align-items:center;justify-content:space-between;text-decoration:none;max-width:290px;border-top:1px solid var(--ink);padding-top:15px;margin-top:44px;font-size:13px;font-weight:700}
+.chapter-next span:last-child{font-size:20px}
+.chapter-next:hover{opacity:.65}
+figcaption{display:block;margin-top:11px;line-height:1.5;color:var(--muted);font-size:12px}
+.fig-title{display:block;font-size:12px;font-weight:700;letter-spacing:.055em;color:var(--ink)}
+.fig-source{display:block;font-size:11.5px;margin-top:3px;color:var(--muted)}
+.zoom{border:0;padding:0;background:transparent;cursor:zoom-in;text-align:left;max-width:100%}
+.zoom img{width:100%}
+.zoom:hover img{filter:brightness(.96)}
+.inline-link,.subtle-link{display:inline-block;padding:0 0 5px;border:0;border-bottom:1px solid var(--ink);text-decoration:none;background:transparent;font-size:13px;line-height:1.5;font-weight:700;color:var(--ink)}
+.inline-link span{margin-left:15px}
+.inline-link:hover,.subtle-link:hover{opacity:.6}
+.intro-top{display:grid;grid-template-columns:var(--grid);column-gap:var(--gutter);row-gap:34px;align-items:start}
+.intro-copy .kicker{margin-bottom:24px;color:var(--ink)}
+.intro h1{font-size:clamp(54px,5.9vw,84px);font-weight:750;line-height:1.02;letter-spacing:-.057em;max-width:12.7ch}
+.intro h1 em{font-weight:400;white-space:nowrap;letter-spacing:-.026em}
+.intro-lede{font-size:16px;line-height:1.66;max-width:56ch;margin:27px 0 24px;color:var(--body)}
+.intro-camera{grid-column:1 / span var(--span-hero);position:relative;min-width:0;isolation:isolate;width:100%}
+.intro-camera::after{content:"";position:absolute;inset:0 0 38px;pointer-events:none;background:url("assets/sony/images/sony-asset-01-8ab85cfd6be8.png") repeat;opacity:.20;mix-blend-mode:screen}
+.intro-camera figcaption{margin-top:10px}
+.hero-meta span:first-child{font-size:15px;color:var(--ink);letter-spacing:0}
+.snapshot span{display:block;margin-bottom:9px}
+.preview-strip{display:grid;grid-template-columns:var(--grid);gap:var(--gutter);align-items:center;margin-top:68px}
+.preview-intro{grid-column:1/span 4;align-self:start;padding-top:24px}
+.preview-intro .overline{margin-bottom:14px;color:var(--ink)}
+.preview-intro p{max-width:30ch;font-size:16px;line-height:1.65;color:var(--body)}
+.preview-screen{grid-column:6 / -1;width:100%}
+.preview-screen .zoom{display:block;width:100%;background:#151515;padding:16px}
+.preview-screen img{max-height:395px;object-fit:contain;margin:auto}
+.section-heading{display:grid;grid-template-columns:var(--grid);gap:0 var(--gutter);margin-bottom:40px}
+.section-heading>div{grid-column:1/span 9}
+.section-heading h2{font-size:clamp(36px,3.65vw,54px);max-width:16ch;line-height:1.1;letter-spacing:-.054em}
+.moment-layout{display:grid;grid-template-columns:var(--grid);gap:0 var(--gutter);align-items:center}
+.moment-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("assets/sony/images/sony-asset-01-8ab85cfd6be8.png") repeat;opacity:.14;mix-blend-mode:screen;z-index:1}
+.moment-stage[data-scene="2"]>img{filter:grayscale(1) blur(2px)}
+.moment-stage[data-scene="3"]>img{filter:grayscale(1) blur(5px);transform:scale(1.04)}
+.moment-scrim{position:absolute;inset:0;background:rgba(0,0,0,.07);pointer-events:none}
+.moment-menu{position:absolute;z-index:3;top:17%;left:12%;width:76%;padding:14px 16px;background:rgba(16,16,16,.96);color:#ddd;opacity:0;transform:translateY(12px);transition:opacity .25s,transform .25s;font-size:12px}
+.moment-menu small{display:block;font-size:10px;letter-spacing:.1em;margin-bottom:8px}
+.moment-menu>div{padding:7px 8px;display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #444}
+.moment-menu .moment-selected{background:#AC632C;color:white}
+.moment-stage[data-scene="2"] .moment-menu{opacity:1;transform:none}
+.moment-clock{position:absolute;z-index:4;right:16px;top:14px;font-size:13px;font-weight:700;color:white;text-shadow:0 1px 3px black}
+.moment-lost{position:absolute;z-index:5;inset:0;display:grid;place-items:center;padding:20px;text-align:center;background:rgba(10,10,10,.6);color:white;font:italic clamp(22px,3vw,32px)/1.2 Georgia,serif;opacity:0;pointer-events:none;transition:opacity .3s}
+.moment-stage[data-scene="3"] .moment-lost{opacity:1}
+.moment-narrative>.overline{margin-bottom:14px}
+.moment-line{font-size:clamp(24px,2.5vw,33px);font-weight:700;line-height:1.28;letter-spacing:-.032em;color:var(--ink);min-height:130px}
+/* Lock the narrative's footprint while the four scene descriptions change. */
+.moment-narrative{min-width:0;width:100%}
+.moment-line-slot{display:grid;width:100%;min-width:0}
+.moment-line-slot>.moment-line{grid-area:1/1;min-height:0;overflow-wrap:break-word}
+.moment-line-reserve{visibility:hidden;pointer-events:none}
+
+.moment-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:26px}
+.moment-controls button{border:1px solid var(--line);padding:10px 3px;background:transparent;color:var(--body);font-size:12px;text-align:center;display:flex;flex-direction:column;line-height:1.45}
+.moment-controls b{font-size:11px}
+.moment-controls button.on{background:var(--ink);color:white;border-color:var(--ink)}
+.editor-note,.moment-credit{margin-top:15px;font-size:12px;color:var(--muted);line-height:1.65}
+.moment-credit{grid-column:1/span 8}
+.statement{font-size:clamp(27px,3.15vw,42px);max-width:33ch;letter-spacing:-.036em;font-weight:700;line-height:1.25;border-top:1px solid var(--line);padding-top:24px;margin-top:48px}
+.statement small{display:block;margin-bottom:12px;font-size:11px;letter-spacing:.11em;color:var(--muted)}
+.research-body{display:grid;grid-template-columns:var(--grid);gap:var(--gutter);align-items:start}
+.research-aside{grid-column:1/span 4;padding-top:10px}
+.research-aside .overline{margin-bottom:16px}
+.research-aside h3{font-size:clamp(22px,2.05vw,28px);line-height:1.25;max-width:17ch;margin-bottom:17px}
+.research-aside>p:not(.overline){font-size:15px;line-height:1.78;margin-bottom:19px;color:var(--body)}
+.research-entries{grid-column:5/-1;min-width:0}
+.research-entry{padding:29px 0 40px;border-top:1px solid var(--line)}
+.research-entry:first-child{border-top:1px solid var(--ink)}
+.research-entry-header span{display:block;margin-bottom:8px}
+.research-entry h3{font-size:clamp(20px,1.95vw,26px);line-height:1.21;max-width:28ch;margin-bottom:18px}
+.research-entry>p{font-size:16px;line-height:1.75;max-width:64ch;margin:14px 0;color:var(--body)}
+.research-entry .so-what{padding-left:16px;border-left:2px solid var(--ink);font-size:15px;color:var(--ink);margin-top:20px}
+.evidence-ref{display:flex;align-items:center;gap:20px;min-width:0;margin:20px 0}
+.evidence-ref .zoom{background:#e8e8e4;padding:8px;border:1px solid var(--line)}
+.evidence-featured{max-width:100%;display:block;margin:24px 0}
+.evidence-featured .zoom{display:block;width:100%;padding:15px}
+.evidence-featured img{width:100%;height:auto;object-fit:contain;max-height:330px}
+.artifact-annotations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px;border-top:1px solid var(--line);padding-top:17px}
+.artifact-annotations div{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px}
+.artifact-annotations b{font-size:12px;color:var(--ink)}
+.artifact-annotations p{font-size:12px;line-height:1.55;color:var(--body)}
+.research-trace{display:flex;flex-wrap:wrap;align-items:center;gap:0;margin-top:20px}
+.research-trace span{font-size:12px;line-height:1.6;color:var(--muted)}
+.research-trace span:not(:last-child)::after{content:"→";padding:0 9px;color:var(--grey)}
+.research-wide{grid-column:3 / span 9;margin-top:42px;max-width:100%;width:100%}
+.research-wide .zoom{display:block;width:100%;padding:12px;background:#eaeae6}
+.research-wide img{width:100%;max-height:320px;object-fit:contain}
+.field-voice{margin-top:54px;border-top:1px solid var(--ink);padding-top:24px}
+.field-voice-top h3{font-size:clamp(24px,2.5vw,32px);margin:11px 0 26px}
+.field-voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
+.field-voice-grid>div{border-top:1px solid var(--line);padding-top:16px}
+.field-voice-grid span{font-size:11px;letter-spacing:.09em;font-weight:700;color:var(--muted)}
+.field-voice blockquote{font:italic 21px/1.45 Georgia,serif;color:var(--ink);margin:18px 0}
+.field-voice h4{font-size:18px;margin:15px 0 12px}
+.field-voice p{font-size:14px;line-height:1.72}
+.field-voice a{font-size:12px;text-decoration:underline;text-underline-offset:3px;display:inline-block;margin-top:12px}
+.field-voice-bottom{margin-top:22px;padding-top:15px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.solutions-heading{max-width:930px}
+.solutions-heading h2{font-size:clamp(36px,3.65vw,54px);line-height:1.08;letter-spacing:-.055em;margin:13px 0 17px}
+.solution-strategy{margin:44px 0 28px;padding:23px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.strategy-intro{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gutter)}
+.strategy-intro>.overline{grid-column:1/-1}
+.strategy-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);margin-top:30px}
+.strategy-pair>div{border-top:1px solid var(--line);padding-top:14px}
+.strategy-pair h4{font-size:19px;margin:8px 0}
+.strategy-pair p{font-size:14px;line-height:1.7}
+.strategy-pair strong{margin-right:8px;color:var(--ink)}
+.strategy-footnote{font-size:12px;line-height:1.6;color:var(--muted);margin-top:22px}
+.solutions-index{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter);padding:15px 0 24px;border-bottom:1px solid var(--line)}
+.solutions-index a{text-decoration:none;font-weight:650;font-size:14px;line-height:1.5}
+.solutions-index a:hover{text-decoration:underline}
+.solutions-index a span{display:block;color:var(--grey);font-size:11px;margin-bottom:5px}
+.solution-piece{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 var(--gutter);padding:63px 0 70px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
+.solution-piece>*{min-width:0;grid-column:1/-1}
+.solution-header{display:grid;grid-template-columns:54px minmax(0,1fr);gap:21px;max-width:910px;margin-bottom:26px}
+.solution-number{font-weight:750;font-size:27px;line-height:1.1}
+.solution-number small{display:block;font-size:11px;color:var(--grey);margin-top:7px}
+.solution-tag{margin-bottom:8px}
+.solution-header h3{font-size:clamp(25px,2.5vw,33px);line-height:1.14;max-width:25ch}
+.solution-summary{font-size:16px;line-height:1.7;color:var(--body);max-width:64ch;margin-top:11px}
+.solution-visual{width:100%;margin:0}
+.solution-visual .zoom{display:block;background:#121212;padding:11px;width:100%}
+.solution-visual img{width:100%;max-height:350px;object-fit:contain;margin:auto}
+.problem-solution{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);margin:24px 0 16px;border-top:1px solid var(--line);padding-top:18px}
+.problem-solution>div+div{border-left:1px solid var(--line);padding-left:18px}
+.ps-label{display:block;margin-bottom:10px}
+.problem-solution p:last-child{font-size:15px;line-height:1.7;color:var(--body)}
+.solution-takeaway{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;line-height:1.7;color:var(--body)}
+.solution-takeaway b{color:var(--ink)}
+#solution-01 .solution-visual{grid-column:1/span 8;grid-row:2/4}
+#solution-01 .problem-solution{grid-column:9/-1;grid-row:2;display:block;margin:0;padding:0;border:0}
+#solution-01 .problem-solution>div{padding-top:14px;border-top:1px solid var(--line)}
+#solution-01 .problem-solution>div+div{margin-top:18px;border-left:0;padding-left:0}
+#solution-01 .solution-takeaway{grid-column:9/-1;grid-row:3;align-self:end}
+#solution-02 .solution-header{grid-column:1/-1}
+#solution-02 .problem-solution{grid-column:1/span 5;grid-row:2;display:block;border-top:0;padding:0;margin:0 0 12px}
+#solution-02 .problem-solution>div{padding-top:14px;border-top:1px solid var(--line)}
+#solution-02 .problem-solution>div+div{padding-left:0;border-left:0;margin-top:18px}
+#solution-02 .solution-visual{grid-column:6/-1;grid-row:2;align-self:start}
+#solution-02 .solution-takeaway{grid-column:6/-1;grid-row:3}
+#solution-03{margin:45px 0 0;padding:76px 0;border-top:2px solid var(--ink)}
+.matched-images figure{width:100%}
+.matched-images figcaption{margin-top:12px}
+.feature-reading{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);border-top:1px solid var(--line);padding-top:18px;margin:15px 0}
+.feature-reading span{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:8px}
+.feature-reading p{font-size:15px;line-height:1.72}
+.solution-details{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);border-top:1px solid var(--line);padding-top:18px;margin-top:17px}
+.solution-details>div{font-size:14px;line-height:1.55;color:var(--body)}
+.solution-details strong{display:block;font-size:19px;color:var(--ink)}
+.screen-annotations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;border-top:1px solid var(--line);padding-top:16px;margin-top:15px}
+.screen-annotations>div{display:flex;align-items:flex-start;gap:9px}
+.screen-annotations span{display:grid;place-items:center;flex:0 0 23px;width:23px;height:23px;border:1px solid var(--ink);border-radius:50%;color:var(--ink);font-size:11px;font-weight:700}
+.screen-annotations p{font-size:13px;line-height:1.55;color:var(--body)}
+.exploration-study{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;margin:32px 0}
+.exploration-head h4{font-size:22px;margin:8px 0}
+.exploration-head>p:last-child{font-size:14px;line-height:1.7;color:var(--body);max-width:72ch}
+.exploration-layouts{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);margin-top:19px}
+.explore-caption{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;font-weight:700;margin-bottom:10px}
+.explore-caption span{font-weight:400;color:var(--muted)}
+.explore-screen{background:#17191A;color:#ddd;padding:15px;min-height:205px;font-size:12px}
+.explore-screen>div:not(.explore-top){border-bottom:1px solid #414345;padding:8px 10px;display:flex;justify-content:space-between;gap:9px}
+.explore-screen .explore-top{display:flex;justify-content:space-between;margin-bottom:7px;color:#bbb;font-size:11px}
+.explore-screen .active{background:#A45B25;color:white}
+.explore-screen i{font-size:11px;color:#ddd;font-style:normal;text-align:right}
+.explore-variant>p{font-size:13px;line-height:1.7;color:var(--body);margin-top:10px}
+.exploration-study figcaption{margin-top:20px}
+#solution-04 .solution-visual{grid-column:1/span 8;grid-row:2/4}
+#solution-04 .solution-visual img{max-height:345px}
+#solution-04 .problem-solution{grid-column:9/-1;grid-row:2;display:block;margin:0;padding:0;border:0}
+#solution-04 .problem-solution>div{border-top:1px solid var(--line);padding-top:14px}
+#solution-04 .problem-solution>div+div{border-left:0;margin-top:18px;padding-left:0}
+#solution-04 .format-explainer{grid-column:9/-1;grid-row:3;align-self:start;margin-top:12px}
+.format-example{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:13px 0}
+.format-example>div{border-top:1px solid var(--line);padding-top:9px}
+.format-example b{font-size:12px}
+.format-example p{font-size:14px;font-weight:700;margin-top:6px}
+.format-explainer>p{font-size:13px;line-height:1.65}
+.format-depth{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);border-top:1px solid var(--line);padding-top:24px;margin-top:30px}
+.format-depth h4{font-size:23px;margin:9px 0}
+.format-depth-copy>p{font-size:14px;line-height:1.7}
+.format-depth-visual{padding:21px;background:#181B1D;color:#fff}
+.depth-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:7px;border-bottom:1px solid #555;padding-bottom:12px;font-size:13px}
+.depth-row b{font-size:12px;color:#D8DEDC}
+.depth-extra{margin-top:17px;font-size:11px;letter-spacing:.08em}
+.depth-extra small{display:block;font-size:12px;line-height:1.65;letter-spacing:0;margin-top:8px;color:#DDD}
+.format-depth-visual>p{font-size:11px;margin-top:18px;color:#DDD}
+.format-depth-visual a{text-decoration:underline}
+.source-boundary{font-size:12px;line-height:1.74;max-width:92ch;color:var(--muted);margin-top:32px}
+.source-boundary a{text-underline-offset:2px}
+.prototype-tabs{display:flex;gap:7px;margin:0 0 20px;flex-wrap:wrap}
+.prototype-tabs button{padding:10px 14px;background:transparent;border:1px solid #aaa;color:var(--ink);font-size:13px}
+.prototype-tabs button.active{color:white;background:var(--ink);border-color:var(--ink)}
+.prototype-area{display:grid;grid-template-columns:var(--grid);column-gap:var(--gutter);align-items:start}
+.prototype-workbench{grid-column:1/span 9;min-width:0}
+.task-copy{grid-column:10/-1;border-top:1px solid var(--line);padding-top:20px}
+.task-copy .overline{margin-bottom:15px}
+.task-copy h3{font-size:clamp(21px,2.2vw,29px);margin-bottom:13px}
+.task-copy>p:not(.overline){font-size:15px;line-height:1.7;color:var(--body)}
+.task-copy .reset{display:inline-block;padding:0 0 5px;border:0;border-bottom:1px solid var(--ink);margin:26px 0 0;background:transparent;color:var(--ink);font-size:13px;font-weight:700}
+.task-copy .demo-note{font-size:12px;color:var(--muted);margin-top:18px}
+.camera-simulation{min-width:0;padding:18px;background:#12191A;color:#E4EAE9}
+.camera-simulation header,.camera-simulation footer{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#A4ADAB;font-size:11px;letter-spacing:.07em}
+.camera-simulation header{padding:0 0 14px}
+.camera-simulation footer{padding:13px 0 0;flex-wrap:wrap;font-size:10px}
+.camera-screen.quick-view{background:#10171A}
+.camera-screen .quick-scene{display:none}
+.camera-screen.quick-view .quick-scene{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.58) saturate(.6);opacity:.8}
+#demoList{position:relative;z-index:2}
+.camera-screen.quick-view #demoList{padding:35px 7px}
+.camera-row.selected{background:#AF672C;color:white}
+.camera-row.selected .row-value,.camera-row.selected .row-arrow{color:white}
+.row-name{flex:1}
+.row-value{max-width:50%;text-align:right;color:#CCD8D4;font-size:12px;line-height:1.35}
+.row-arrow{color:#A4B0AC;margin-left:6px}
+.screen-softkey{position:absolute;bottom:10px;left:12px;right:12px;border-top:1px solid #4E595A;padding-top:9px;display:flex;justify-content:space-between;gap:8px;color:#B8C2BE;font-size:10px;letter-spacing:.05em}
+.screen-softkey b{font-size:12px;letter-spacing:0;color:white}
+.screen-softkey[hidden]{display:none}
+.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.camera-row.quick-tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:74px;background:rgba(12,18,20,.93);border:1px solid #58665D;padding:9px}
+.camera-row.quick-tile[data-category="focus"]{border-top:3px solid #8A74A5}
+.camera-row.quick-tile[data-category="shooting"]{border-top:3px solid #9A6656}
+.camera-row.quick-tile.selected{background:rgba(48,56,53,.97);outline:2px solid white;outline-offset:-2px}
+.quick-tile .row-name{font-size:11px;color:#CED8D2}
+.quick-tile .row-value{font-size:15px;color:white;max-width:100%}
+.camera-screen.quick-view .screen-softkey{display:none}
+.format-help{padding:12px 4px 5px}
+.format-help-trigger{border:1px solid #8E9F97;background:transparent;padding:8px 12px;color:white;font-size:12px}
+.format-help p{font-size:12px;line-height:1.6;color:#DCE6E2;margin-top:10px;background:#293431;padding:11px}
+.dpad button:hover{background:#E3E3DD}
+.dpad .up{grid-area:up}
+.dpad .down{grid-area:down}
+.dpad .left{grid-area:left}
+.dpad .right{grid-area:right}
+.dpad .center{grid-area:center;font-size:13px;font-weight:800}
+.prototype-controller .status.complete{border-left-width:4px}
+.evaluation-plan{display:grid;grid-template-columns:var(--grid);gap:var(--gutter);border-top:1px solid var(--line);padding-top:25px}
+.evaluation-plan>div{grid-column:1/span 5}
+.evaluation-plan ol{grid-column:6/-1;padding:0;margin:0;list-style:none}
+.evaluation-plan h3{font-size:26px;margin:12px 0}
+.evaluation-plan p:not(.overline){font-size:15px;line-height:1.7}
+.evaluation-plan li{border-top:1px solid var(--line);padding:12px 0;font-size:15px;color:var(--ink)}
+.evaluation-plan li span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.ending{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);border-top:1px solid var(--line);padding-top:22px;margin:38px 0}
+.ending span{font-size:11px;letter-spacing:.1em;color:var(--muted);font-weight:700;display:block;margin-bottom:9px}
+.ending p{font-size:15px;line-height:1.75}
+.reference-note{padding:22px 0;border-top:1px solid var(--line)}
+.reference-note p{font-size:13px;line-height:1.75;max-width:86ch}
+.return-image{position:relative;isolation:isolate;background:#111;overflow:hidden}
+.return-image::after{content:"";position:absolute;inset:0;background:url("assets/sony/images/sony-asset-01-8ab85cfd6be8.png") repeat;mix-blend-mode:screen;opacity:.18;pointer-events:none}
+.return-overlay{position:absolute;left:4%;top:12%;color:white;text-shadow:0 2px 10px #161616}
+.return-overlay p{font-weight:800;font-size:clamp(22px,3vw,40px);color:white;letter-spacing:-.04em;line-height:1.1}
+.return-overlay em{font-size:clamp(22px,3vw,41px);line-height:1.25;display:block;margin-top:7px}
+.return-photograph figcaption{padding:7px 0 0}
+.final-line span{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
+.site-footer{border-top:1px solid var(--line);padding:23px 0 0;display:flex;justify-content:space-between;gap:30px}
+.site-footer p{font-size:12px;line-height:1.7;color:var(--muted);max-width:85ch}
+.site-footer a{font-size:12px;white-space:nowrap;text-decoration:none}
+.lightbox[hidden]{display:none}
+.lightbox{position:fixed;z-index:90;inset:0;background:rgba(9,9,9,.97);padding:64px 20px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.lightbox img{max-width:94vw;max-height:78vh;object-fit:contain}
+.lightbox p{font-size:13px;color:#EEE;text-align:center;max-width:90ch}
+.lightbox-close{position:absolute;right:18px;top:16px;background:transparent;color:white;border:1px solid #777;padding:8px 14px;font-size:13px}
+body{margin:0;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:clip;font:15px/1.72 Arial,Helvetica,sans-serif}
+.evidence-ref>span{font-size:12px;line-height:1.5;color:var(--muted);letter-spacing:.08em;min-width:0;overflow-wrap:anywhere}
+.hero-deck{display:grid;grid-template-columns:var(--grid);gap:var(--gutter);align-items:end;margin-top:24px}
+.hero-deck .intro-lede{grid-column:1/span 7;max-width:60ch;margin:0;font-size:17px;line-height:1.67}
+.hero-deck .inline-link{grid-column:9/-1;justify-self:start;align-self:end;margin-bottom:4px}
+.intro-copy{padding:0;grid-column:1/span 11}
+.intro-camera img{width:100%;filter:grayscale(1) contrast(1.1);height:var(--image-hero);object-position:center 48%;object-fit:cover}
+.hero-meta{grid-column:10 / -1;align-self:end;display:flex;flex-direction:column;gap:16px;padding-bottom:25px;justify-content:flex-end}
+.hero-meta span{font-weight:700;letter-spacing:.095em;color:var(--muted);overflow-wrap:anywhere;font-size:10px;line-height:1.7}
+.snapshot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:20px 0 24px;margin-top:46px}
+.snapshot p{line-height:1.55;color:var(--body);font-size:13px}
+.chapter{display:grid;grid-template-columns:var(--grid);column-gap:var(--gutter);border-top:1px solid var(--line);padding:72px 0 96px;scroll-margin-top:24px;min-width:0;row-gap:0}
+.section-heading>p{grid-column:1/span 6;font-size:16px;line-height:1.75;color:var(--body);margin-top:18px;max-width:63ch}
+.moment-stage{width:100%;position:relative;overflow:hidden;min-height:0;background:#191919;isolation:isolate;grid-column:1/span 9;height:clamp(330px,31vw,425px);aspect-ratio:auto}
+.moment-narrative{grid-column:10/-1}
+.moment-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.14);transition:filter .45s,transform .55s;object-position:center}
+.research-featured{display:grid;grid-template-columns:var(--grid);gap:0 var(--gutter);padding:5px 0 35px;border-bottom:1px solid var(--line);margin-bottom:31px}
+.research-featured-head{grid-column:1/-1;margin-bottom:25px}
+.research-featured-head .overline{margin-bottom:9px}
+.research-featured-head h3{font-size:clamp(23px,2.15vw,29px);letter-spacing:-.045em;max-width:28ch}
+.research-featured-visual{grid-column:1/span 8;min-width:0}
+.research-featured-figure{margin:0;width:100%}
+.research-featured-figure .zoom{display:block;width:100%;padding:14px;background:#E9E9E4;border:1px solid var(--line)}
+.research-featured-figure img{width:100%;height:auto;max-height:330px;object-fit:contain;image-rendering:auto}
+.research-featured-figure figcaption{margin:9px 0 0}
+.research-featured .artifact-annotations{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:17px;padding-top:12px}
+.research-featured-copy{grid-column:9/-1;border-top:1px solid var(--ink);padding-top:13px}
+.research-featured-copy .overline{color:var(--ink);margin-bottom:7px}
+.research-featured-copy p{font-size:15px;line-height:1.65;color:var(--body);margin-bottom:22px}
+.research-body .research-aside{grid-column:1/span 5}
+.research-body .research-entries{grid-column:6/-1}
+.research-entries .research-entry{border-top:1px solid var(--ink)}
+.research-entries .research-entry>p{margin-top:10px}
+.research-entries .research-trace{font-size:12px}
+.evidence-ref:not(.evidence-featured) .zoom{flex-shrink:0;width:265px}
+.strategy-bridge{margin-bottom:28px}
+.strategy-bridge .overline{margin-bottom:15px}
+.strategy-bridge h3{font-size:clamp(27px,2.7vw,37px);max-width:22ch;line-height:1.13;letter-spacing:-.048em}
+.strategy-bridge em{display:block;text-transform:none;margin-top:7px;font-size:.85em;line-height:1.2}
+.decision-map{border-top:1px solid var(--line);margin:28px 0;display:grid;grid-template-columns:1fr 1fr;gap:0 var(--gutter)}
+.decision-map>div{padding:13px 0 16px;border-bottom:1px solid var(--line);display:grid;gap:3px}
+.decision-map span{font-size:12px;line-height:1.6;color:var(--muted)}
+.decision-map b{font-size:15px;line-height:1.45;font-weight:700}
+.strategy-intro h3{grid-column:1/span 6;line-height:1.22;font-size:25px}
+.strategy-intro>p{grid-column:7/-1;line-height:1.75;color:var(--body);font-size:14px}
+.solutions-heading>p:last-child{font-size:17px;line-height:1.7;color:var(--body);max-width:61ch}
+.feature-statement{margin-top:6px;margin-bottom:24px;border-top:1px solid var(--line);padding-top:22px}
+.feature-statement .overline{margin-bottom:8px}
+.feature-statement p{max-width:21ch;font-weight:800;letter-spacing:-.04em;line-height:1.14;font-size:clamp(25px,2.65vw,36px)}
+.feature-statement em{display:block;margin-top:8px;font-size:.86em}
+.matched-images{display:grid;margin:22px 0 23px;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gutter);align-items:start}
+.matched-label{display:block;color:var(--ink);min-height:0;margin-bottom:12px;font-size:12px;line-height:1.45;letter-spacing:.07em}
+.matched-images .zoom{display:flex;align-items:center;justify-content:center;width:100%;background:#131313;padding:12px;min-height:0;height:var(--image-featured)}
+.matched-images img{width:100%;object-fit:contain;max-height:100%}
+#solution-03 .solution-header h3{line-height:1.07;max-width:24ch;font-size:clamp(30px,3.2vw,42px)}
+#solution-03 .solution-summary{max-width:59ch}
+#solution-03 .solution-takeaway{max-width:92ch}
+#solution-02 .ps-label{font-size:11px}
+#prototype .section-heading{margin-bottom:25px}
+#prototype .section-heading h2{font-size:clamp(36px,3.6vw,50px);max-width:19ch}
+#prototype .section-heading>p{font-size:15px;line-height:1.65;margin-top:13px}
+.prototype-task{border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:15px 0 19px;margin-bottom:19px}
+.prototype-task h3{max-width:35ch;font-size:clamp(25px,2.5vw,32px);margin:7px 0 5px}
+.prototype-task>p:last-child{color:var(--body);font-size:15px}
+.prototype-controller{display:flex;justify-content:center;flex-direction:column;border-top:1px solid var(--line);padding-top:21px;margin-top:19px;gap:18px;align-items:center}
+.dpad{display:grid;grid-template-areas:". up ." "left center right" ". down .";grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px);gap:5px}
+.dpad button{border:1px solid #AAA;background:transparent;color:var(--ink);font-size:20px;min-width:48px;min-height:48px}
+.camera-screen{position:relative;padding:12px;background:#151C1F;border:1px solid #465152;overflow:hidden;outline-offset:4px;min-height:400px}
+.camera-row{display:flex;align-items:center;text-align:left;gap:8px;width:100%;background:transparent;color:#DDE4E3;border:0;border-bottom:1px solid #3D4748;padding:11px 12px;font-size:13px;min-height:45px}
+.prototype-controller .status{width:100%;padding:13px;border-left:2px solid var(--ink);background:#ECECE7;color:var(--ink);font-size:13px;line-height:1.6;text-align:center;max-width:360px}
+.reflection-learning{display:grid;grid-template-columns:var(--grid);gap:var(--gutter);border-top:1px solid var(--ink);padding:23px 0;margin:16px 0 36px}
+.reflection-learning .overline{grid-column:1/span 4}
+.reflection-learning p{grid-column:5/-1;font-size:clamp(18px,1.65vw,22px);line-height:1.48;letter-spacing:-.015em;max-width:44ch}
+.return-photograph{position:relative;width:100%;margin:30px 0 50px;grid-column:1 / span 10}
+.return-image img{width:100%;object-fit:cover;filter:grayscale(1) contrast(1.18);max-height:415px;height:clamp(350px,30vw,415px)}
+.final-line{border-top:1px solid var(--ink);padding:26px 0 20px;margin:20px 0 30px}
+.final-line p{font-weight:800;letter-spacing:-.06em;margin-top:17px;color:var(--ink);font-size:clamp(35px,4vw,52px);line-height:1.08;max-width:20ch}
+.final-line em{font-weight:400;letter-spacing:-.05em;display:block}
+.signature-line{font-size:18px;font-weight:800;letter-spacing:-.04em;margin:7px 0 25px}
+.signature-line em{font-weight:400;font-size:1.12em}
+.documented-process{border-top:1px solid var(--ink);margin:12px 0 27px;padding-top:17px}
+.documented-process>.overline{margin-bottom:15px}
+.process-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gutter)}
+.process-steps>div{border-top:1px solid var(--line);padding-top:11px}
+.process-steps span{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--ink);margin-bottom:7px}
+.process-steps p{font-size:13px;line-height:1.55;color:var(--body);max-width:25ch}
+.process-source{font-size:12px;line-height:1.55;color:var(--muted);margin-top:18px}
+.research-pause{position:relative;grid-column:1 / span 10;margin:clamp(58px,7vw,100px) 0 16px;overflow:hidden}
+.research-pause img{width:100%;height:clamp(300px,29vw,365px);object-fit:cover;object-position:center 48%;filter:grayscale(1) contrast(1.12) brightness(.79)}
+.pause-words{position:absolute;left:5.5%;right:30%;bottom:9%;color:#fff;text-shadow:0 1px 15px #10101070}
+.pause-words span{display:block;letter-spacing:.14em;font-size:11px;font-weight:700;margin-bottom:13px}
+.pause-words p{font-size:clamp(23px,3vw,41px);line-height:1.18;letter-spacing:-.035em;font-weight:700;max-width:19ch}
+.research-pause figcaption{margin-top:10px}
+#research .research-featured-copy strong{color:var(--ink)}
+.section-heading>p,
+.research-entry>p,
+.research-aside>p:not(.overline),
+.solution-summary,
+.solutions-heading>p,
+.problem-solution p:last-child,
+.task-copy>p:not(.overline),
+.ending p,
+.evaluation-plan p:not(.overline){max-width:58ch}
+.moment-player{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+.moment-player button{border:1px solid var(--ink);border-radius:0;font:700 12px/1.4 Arial,Helvetica,sans-serif;min-height:39px;padding:9px 13px;background:transparent;color:var(--ink)}
+.moment-player .moment-play{background:var(--ink);color:var(--paper);min-width:141px;text-align:left}
+.moment-play #momentPlayIcon{display:inline-block;width:17px;font-size:13px}
+.moment-player button:hover{opacity:.73}
+.moment-player .moment-counter{margin-left:auto;font:700 11px/1.5 Arial,Helvetica,sans-serif;letter-spacing:.13em;color:var(--muted)}
+.moment-scene-note{position:absolute;z-index:4;bottom:24px;left:16px;right:16px;max-width:max-content;color:white;font:700 12px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.02em;background:rgba(12,12,12,.75);padding:7px 10px}
+.moment-timer-track{display:none}
+.moment-timer-track span{display:block;width:100%;height:100%;background:#f6f6f2;transform:scaleX(0);transform-origin:left center;will-change:transform}
+.moment-stage[data-scene="3"] .moment-scene-note{opacity:0}
+.moment-stage[data-scene="0"]>img,
+.moment-stage[data-scene="1"]>img{animation:moment-photo-drift 6.8s ease-in-out alternate infinite;animation-play-state:paused}
+.moment-stage.is-playing[data-scene="0"]>img,
+.moment-stage.is-playing[data-scene="1"]>img{animation-play-state:running}
+
+@media (min-width:1151px){
+.chapter:not(.intro){padding-top:96px;padding-bottom:112px}
+.chapter.intro{padding-top:44px;padding-bottom:94px}
+.chapter-number{margin-bottom:46px}
+.research-featured{padding-bottom:40px;margin-bottom:45px}
+.research-body{margin-top:8px}
+.research-entries .research-entry{padding:34px 0 45px}
+.research-entries .research-entry:first-child{padding-top:29px}
+.research-wide{margin-top:56px}
+.field-voice{margin-top:60px}
+.research-end{margin-top:60px}
+.solutions-index{margin-bottom:24px}
+.solution-piece{padding-top:77px;padding-bottom:88px}
+#solution-01 .solution-header,
+  #solution-02 .solution-header,
+  #solution-04 .solution-header{margin-bottom:35px}
+#solution-03{margin-top:96px;padding-top:105px;padding-bottom:106px}
+#solution-03 .solution-header{margin-bottom:41px}
+#solution-03 .feature-statement{margin:29px 0 32px}
+#solution-03 .matched-images{margin:23px 0 27px}
+#solution-04{padding-top:90px}
+#prototype .prototype-task{margin-bottom:22px}
+#prototype .prototype-controller{margin-top:18px}
+.reflection-learning{margin-top:45px;margin-bottom:52px}
+.return-photograph{margin-top:73px;margin-bottom:59px}
+}
+
+@media (min-width:1160px){
+.page{padding-right:clamp(76px,6.3vw,108px);max-width:var(--canvas-outer);padding:0 var(--editorial-right) 0 var(--editorial-left);margin-left:0;margin-right:auto}
+}
+
+@media (max-width:1150px){
+:root{--columns:6;--gutter:20px}
+.shell{grid-template-columns:minmax(0,1fr)}
+.rail{position:sticky;top:0;z-index:60;background:rgba(246,246,242,.96);border-right:0;border-bottom:1px solid var(--line)}
+.rail-inner{min-height:0;height:auto;display:flex;flex-direction:row;align-items:center;gap:20px;padding:12px 22px}
+.wordmark{font-size:15px}
+.wordmark span{font-size:18px}
+.wordmark small,.rail-label,.rail-bottom{display:none}
+.rail-nav-wrap{flex:1;min-width:0;margin:0;overflow:hidden}
+.rail-nav{display:flex;gap:4px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.rail-nav::-webkit-scrollbar{display:none}
+.rail-nav a{border-left:0;border-bottom:2px solid transparent;padding:8px 10px;white-space:nowrap;font-size:12px}
+.rail-nav a.current{border-bottom-color:var(--ink);border-left:0}
+.page{padding:0 clamp(28px,4vw,46px);max-width:none;margin:0 auto}
+.chapter{scroll-margin-top:83px}
+.intro-copy{grid-column:1/-1}
+.intro-camera{grid-column:1/span 5}
+.hero-meta{grid-column:6/-1}
+.intro h1{font-size:clamp(50px,6.6vw,74px)}
+.preview-intro{grid-column:1/span 2}
+.preview-screen{grid-column:3/-1}
+.section-heading>div{grid-column:1/-1}
+.section-heading>p{grid-column:1/span 4}
+.moment-credit{grid-column:1/span 4}
+.research-aside{grid-column:1/span 2}
+.research-entries{grid-column:3/-1}
+.research-wide{grid-column:1/-1}
+.strategy-intro{grid-template-columns:repeat(6,minmax(0,1fr))}
+.strategy-intro h3{grid-column:1/span 3}
+.strategy-intro>p{grid-column:4/-1}
+.solution-piece{grid-template-columns:repeat(6,minmax(0,1fr))}
+#solution-01 .solution-visual,#solution-04 .solution-visual{grid-column:1/span 4}
+#solution-01 .problem-solution,#solution-01 .solution-takeaway,#solution-04 .problem-solution,#solution-04 .format-explainer{grid-column:5/-1}
+#solution-02 .problem-solution{grid-column:1/span 3}
+#solution-02 .solution-visual{grid-column:4/-1}
+#solution-02 .solution-takeaway{grid-column:4/-1}
+.prototype-area,.evaluation-plan{grid-template-columns:repeat(6,minmax(0,1fr))}
+.evaluation-plan>div{grid-column:1/span 3}
+.evaluation-plan ol{grid-column:4/-1}
+.hero-deck{grid-template-columns:repeat(6,minmax(0,1fr))}
+.hero-deck .intro-lede{grid-column:1/span 4}
+.hero-deck .inline-link{grid-column:5/-1}
+.moment-stage{grid-column:1/span 4}
+.moment-narrative{grid-column:5/-1}
+.research-featured{grid-template-columns:repeat(6,minmax(0,1fr))}
+.research-featured-visual{grid-column:1/span 4}
+.research-featured-copy{grid-column:5/-1}
+.research-featured .artifact-annotations{grid-template-columns:1fr;gap:9px}
+.research-body .research-aside{grid-column:1/span 2}
+.research-body .research-entries{grid-column:3/-1}
+.decision-map{grid-template-columns:1fr 1fr}
+.reflection-learning{grid-template-columns:repeat(6,minmax(0,1fr))}
+.reflection-learning .overline{grid-column:1/span 2}
+.reflection-learning p{grid-column:3/-1}
+.prototype-workbench{grid-column:1/span 4}
+.task-copy{grid-column:5/-1}
+.process-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pause-words{right:13%}
+}
+
+@media (min-width:741px) and (max-width:1150px){
+.chapter:not(.intro){padding-top:78px;padding-bottom:96px}
+.chapter.intro{padding-bottom:91px}
+.chapter-number{margin-bottom:35px}
+.research-featured{margin-bottom:42px;padding-bottom:42px}
+.research-entries .research-entry{padding:35px 0 44px}
+.research-wide{margin-top:56px}
+.field-voice{margin-top:58px}
+.research-end{margin-top:45px}
+.solution-piece{padding-top:68px;padding-bottom:76px}
+#solution-03{margin-top:76px;padding-top:84px;padding-bottom:86px}
+#solution-03 .feature-statement{margin-top:31px;margin-bottom:39px}
+.reflection-learning{margin-bottom:46px}
+.return-photograph{margin-top:76px;margin-bottom:58px}
+}
+
+@media (min-width:741px) and (max-width:1159px){
+.page{padding-right:clamp(44px,5.8vw,70px);max-width:none;padding:0 clamp(28px,4vw,46px);margin:0 auto}
+}
+
+@media (max-width:740px){
+:root{--columns:4;--gutter:14px}
+.rail-inner{padding:9px 13px;gap:10px}
+.rail-nav a{font-size:11.5px;padding:8px 8px}
+.chapter{padding:54px 0 67px;scroll-margin-top:72px}
+.intro-lede{font-size:16px;line-height:1.63;margin:23px 0 21px}
+.intro-camera{grid-column:1 / -1}
+.intro-camera::after{inset:0 0 42px}
+.hero-meta span{font-size:10px;max-width:37%}
+.hero-meta span:first-child{font-size:12px}
+.snapshot{grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin-top:31px}
+.preview-strip{grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-top:47px}
+.preview-intro,.preview-screen{grid-column:1/-1}
+.preview-intro{padding:0}
+.preview-intro p{max-width:56ch}
+.section-heading{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:30px}
+.section-heading h2{font-size:clamp(31px,7.2vw,42px);max-width:none}
+.section-heading>p{grid-column:1/-1;font-size:15px}
+.moment-layout{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:26px}
+.moment-stage,.moment-narrative,.moment-credit{grid-column:1/-1}
+.moment-stage{aspect-ratio:3/2;height:auto}
+.moment-line{min-height:auto;font-size:24px}
+.moment-controls{margin-top:17px}
+.moment-credit{margin-top:0}
+.statement{font-size:27px}
+.research-body{grid-template-columns:repeat(4,minmax(0,1fr))}
+.research-aside,.research-entries{grid-column:1/-1}
+.research-aside{padding:0 0 18px}
+.research-aside h3{max-width:28ch}
+.research-entry h3{font-size:26px}
+.artifact-annotations{grid-template-columns:1fr;gap:9px}
+.evidence-featured .zoom{padding:7px}
+.field-voice-grid{grid-template-columns:1fr;gap:25px}
+.solutions-heading h2{font-size:clamp(34px,7vw,43px)}
+.solution-strategy{margin-top:30px}
+.strategy-intro{grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.strategy-intro h3,.strategy-intro>p{grid-column:1/-1}
+.strategy-pair{grid-template-columns:1fr;gap:16px}
+.solutions-index{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.solution-header{grid-template-columns:36px minmax(0,1fr);gap:12px}
+.solution-header h3{font-size:clamp(25px,6vw,30px)}
+#solution-01 .solution-visual,#solution-01 .problem-solution,#solution-01 .solution-takeaway,
+ #solution-02 .solution-visual,#solution-02 .problem-solution,#solution-02 .solution-takeaway,
+ #solution-04 .solution-visual,#solution-04 .problem-solution,#solution-04 .format-explainer{grid-column:1/-1;grid-row:auto}
+#solution-01 .problem-solution,#solution-02 .problem-solution,#solution-04 .problem-solution{margin-top:19px}
+#solution-03 .solution-header h3{font-size:clamp(31px,7.2vw,36px)}
+.matched-images img{max-height:350px}
+.feature-reading,.exploration-layouts,.format-depth,.ending{grid-template-columns:1fr;gap:18px}
+.solution-details,.screen-annotations{grid-template-columns:1fr;gap:16px}
+.format-explainer{margin-top:19px}
+.format-depth{margin-top:24px}
+.prototype-area,.evaluation-plan{grid-template-columns:repeat(4,minmax(0,1fr))}
+.prototype-workbench,.task-copy,.evaluation-plan>div,.evaluation-plan ol{grid-column:1/-1}
+.task-copy{margin-top:28px}
+.camera-simulation{padding:11px}
+.camera-screen{min-height:370px;padding:7px}
+.camera-row{font-size:12px;padding:9px;min-height:43px}
+.row-value{font-size:11px}
+.camera-row.quick-tile{min-height:67px;padding:6px}
+.quick-grid{gap:4px}
+.prototype-controller{margin-top:15px}
+.return-overlay{top:8%;left:6%;right:7%}
+.return-overlay p{font-size:24px}
+.return-overlay em{font-size:26px}
+.final-line p{font-size:clamp(35px,10vw,58px)}
+.site-footer{flex-direction:column;gap:15px}
+.intro-copy{grid-column:1/-1}
+.intro h1{font-size:clamp(39px,9.1vw,60px);max-width:none;letter-spacing:-.064em;line-height:1.01}
+.intro h1 em{white-space:normal}
+.hero-deck{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:12px}
+.hero-deck .intro-lede,.hero-deck .inline-link{grid-column:1/-1}
+.hero-deck .intro-lede{font-size:16px}
+.intro-camera img{height:clamp(265px,66vw,335px);object-position:center 48%}
+.hero-meta{grid-column:1/-1;display:none;flex-direction:row;gap:20px;justify-content:space-between;align-self:start;padding:0}
+.moment-stage,.moment-narrative{grid-column:1/-1}
+.research-featured-visual,.research-featured-copy{grid-column:1/-1}
+.research-featured-figure .zoom{padding:7px}
+.research-featured .artifact-annotations{grid-template-columns:1fr;gap:10px}
+.research-body .research-aside,.research-body .research-entries{grid-column:1/-1}
+.decision-map{grid-template-columns:1fr}
+.strategy-bridge h3{font-size:31px}
+.strategy-bridge em{font-size:.87em}
+.feature-statement p{font-size:31px}
+.matched-images{grid-template-columns:1fr;gap:27px}
+.matched-images .zoom{min-height:190px;height:auto}
+.prototype-workbench,.task-copy{grid-column:1/-1}
+.dpad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px)}
+.reflection-learning .overline,.reflection-learning p{grid-column:1/-1}
+.reflection-learning p{font-size:20px}
+.return-image img{height:clamp(290px,85vw,360px);object-position:center}
+.signature-line{font-size:16px}
+.chapter:not(.intro){padding-top:64px;padding-bottom:77px}
+.chapter.intro{padding-top:29px;padding-bottom:76px}
+.chapter-number{margin-bottom:29px}
+.research-featured{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:18px;margin-bottom:34px;padding-bottom:36px}
+.research-entries .research-entry{padding:30px 0 38px}
+.research-wide{grid-column:1/-1;margin-top:48px}
+.field-voice{margin-top:48px}
+.research-end{margin-top:38px}
+.solution-piece{grid-template-columns:repeat(4,minmax(0,1fr));padding:43px 0 48px;padding-top:52px;padding-bottom:65px}
+#solution-03{margin-top:55px;padding-top:68px;padding-bottom:73px}
+#solution-03 .feature-statement{margin-top:26px;margin-bottom:35px}
+.return-photograph{margin-top:58px;margin-bottom:52px;grid-column:1 / -1}
+.reflection-learning{grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:40px}
+#prototype .prototype-controller{margin-top:15px}
+.process-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.process-steps p{font-size:12px}
+.research-pause{margin:65px 0 10px;grid-column:1 / -1}
+.research-pause img{height:280px}
+.pause-words{left:6%;right:8%;bottom:13%}
+.pause-words p{font-size:26px}
+.page{padding:0 20px;padding-right:26px;max-width:none;margin:0 auto}
+.moment-player{gap:8px;margin-top:16px}
+.moment-player button{min-height:44px}
+.moment-player .moment-counter{width:100%;margin-left:0}
+.moment-scene-note{font-size:11px;bottom:21px;left:10px;right:10px}
+}
+
+@media (max-width:400px){
+.moment-controls button{font-size:10px}
+.moment-controls button b{font-size:10px}
+.hero-meta span{max-width:42%}
+.camera-screen{min-height:395px}
+.camera-row.quick-tile .row-value{font-size:12px}
+.intro h1{font-size:clamp(39px,9.8vw,43px)}
+.matched-images .zoom{min-height:215px}
+.research-featured-head h3{font-size:29px}
+.research-featured-copy p{font-size:14px}
+.research-pause img{height:280px}
+.pause-words p{font-size:24px}
+}
+
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+.moment-stage>img,.moment-menu,.moment-lost{transition:none!important;animation:none!important}
+}
+@keyframes moment-photo-drift {
+  from {transform:scale(1.015) translateX(0);}
+  to   {transform:scale(1.042) translateX(-.8%);}
+}
+/* V26 — compact evidence, state legend, evaluation and accessible controls */
+.semantic-legend{display:flex;flex-wrap:wrap;gap:10px 24px;border-top:1px solid var(--line);padding:12px 0 3px;margin-top:12px;font:12px/1.5 Arial,Helvetica,sans-serif}
+.semantic-legend>div{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}.semantic-legend b{font-size:10.5px;letter-spacing:.09em;color:var(--ink)}.semantic-legend span{color:var(--muted)}
+.research-photo-link{margin-top:16px;display:block;text-align:left}.research-featured-copy{align-self:start}.research-featured-copy .research-observation{max-width:47ch}
+.ending{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gutter)}
+.camera-row:focus-visible,.dpad button:focus-visible,.moment-player button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@media(max-width:740px){.ending{grid-template-columns:1fr;gap:20px}.semantic-legend{gap:8px 16px}}
+
+/* Text contrast: use the established dark neutral for small navigation metadata. */
+.rail-label,.rail-nav a span{color:var(--muted)}
+
+/* V26 research evidence presentation — preserve natural image proportions. */
+#research .battery-evidence{align-items:flex-start;gap:14px;margin:16px 0 10px;max-width:100%}
+#research .battery-evidence .zoom{width:min(100%,410px);flex:0 1 410px;padding:0;border:0;background:transparent;line-height:0}
+#research .battery-evidence .zoom img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;aspect-ratio:auto}
+#research .battery-evidence>span{align-self:flex-end;padding-bottom:3px;font-size:11px;line-height:1.45}
+#research .research-aside .subtle-link[data-source]{margin-top:8px;text-align:left;max-width:100%;}
+@media (max-width:740px){
+  #research .battery-evidence{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  #research .battery-evidence .zoom{width:100%;max-width:410px;flex:0 0 auto}
+  #research .battery-evidence>span{align-self:flex-start;padding:0}
+}
+
+/* V27 evidence refinement: small, inspectable original audit screenshots.
+   Respects the existing editorial canvas, typography and column spans. */
+.archival-reference{margin:16px 0 0;width:100%;max-width:232px}
+.archival-reference .zoom{display:block;width:100%;background:#171717;cursor:zoom-in}
+.archival-reference img{display:block;width:100%;height:auto;max-height:180px;object-fit:contain;object-position:left center}
+.archival-reference figcaption{margin-top:7px;font-size:10px;line-height:1.45;letter-spacing:.045em;color:var(--muted)}
+@media(max-width:740px){.archival-reference{max-width:240px}.archival-reference img{max-height:180px}}
+
+.back-to-portfolio{display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.11em;text-decoration:none;text-transform:uppercase;transition:color .2s ease,transform .2s ease}
+.back-to-portfolio:hover{color:var(--ink);transform:translateX(-2px)}
+@media(max-width:1150px){.back-to-portfolio{margin:0;flex:0 0 auto;font-size:9px}.wordmark{display:none}}
+@media(max-width:740px){.back-to-portfolio{font-size:0;gap:0}.back-to-portfolio::before{content:'←';font-size:18px;line-height:1}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside aria-label="Case study navigation" class="rail">
+<div class="rail-inner">
+<a class="back-to-portfolio" href="work.html#work" aria-label="Back to portfolio work section">← BACK TO PORTFOLIO</a>
+<a class="wordmark" href="#overview">SONY <span>α</span><small>AN INTERFACE STUDY</small></a>
+<div class="rail-nav-wrap">
+<p class="rail-label">THE CASE STUDY</p>
+<nav aria-label="Chapters" class="rail-nav">
+<a class="current" href="#overview"><span>01</span> Overview</a>
+<a href="#moment"><span>02</span> The moment</a>
+<a href="#research"><span>03</span> Research</a>
+<a href="#solutions"><span>04</span> Design solutions</a>
+<a href="#prototype"><span>05</span> Try the concept</a>
+<a href="#evaluation"><span>06</span> Reflection</a>
+</nav>
+</div>
+<div class="rail-bottom"><div class="read-progress"><span id="progressBar"></span></div><span>INDEPENDENT CONCEPT<br/>NOT AFFILIATED WITH SONY</span></div>
+</div>
+</aside>
+<main class="page" id="main">
+<section aria-labelledby="overview-title" class="chapter intro" id="overview">
+<div class="chapter-number">01 <span>/</span> INTRODUCTION</div>
+<div class="intro-top">
+<div class="intro-copy">
+<p class="kicker">SONY α  /  INTERFACE STUDY</p>
+<h1 id="overview-title">Less time in menus.<br/><em class="display-italic">More time looking.</em></h1>
+</div>
+<figure class="intro-camera">
+<img alt="Black and white photograph of a person holding a camera in front of their face, from the original project document" decoding="async" fetchpriority="high" height="2554" loading="eager" src="assets/sony/images/sony-asset-02-e2b47d5848b1.webp" width="2900"/>
+<figcaption>FRAME 001 — Photographer · Original project photograph</figcaption>
+</figure>
+<aside aria-label="Publication details" class="hero-meta"><span>FRAME 001</span><span>UX / INTERACTION / INFORMATION ARCHITECTURE</span></aside></div><div aria-label="Project introduction" class="hero-deck"><p class="intro-lede">An independent Sony Alpha interface study developed around the α7S III project reference: how to read live-view information and check settings without losing sight of the scene.</p><a class="inline-link" href="#moment">Begin the case study <span aria-hidden="true">↘</span></a></div>
+<div aria-label="Project snapshot" class="snapshot">
+<div><span>PROJECT CREDIT</span><p>Eeshitvaa Singh · credited in the original design document</p></div>
+<div><span>METHOD</span><p>Exploratory interviews, FigJam synthesis and interface audit</p></div>
+<div><span>DESIGN SCOPE</span><p>Live view, quick settings, Shooting menu and recording formats</p></div>
+<div><span>WORK SHOWN</span><p>Four interface proposals and an interactive menu study</p></div>
+</div>
+<div class="preview-strip">
+<div class="preview-intro"><span class="overline">A FIRST LOOK AT THE PROPOSAL</span><p>The proposed menu places each active value beside its setting name. The original and proposed screens are compared below.</p></div>
+<figure class="preview-screen">
+<button aria-label="Enlarge proposed Shooting menu" class="zoom" type="button"><img alt="Proposed Shooting menu displaying setting values beside their labels" decoding="async" height="776" loading="lazy" src="assets/sony/images/sony-asset-03-676fb21dd418.png" width="1068"/></button>
+<figcaption>FIG. 01 — Proposed Shooting menu · Proposed interface study</figcaption>
+</figure>
+</div>
+</section>
+<section aria-labelledby="moment-title" class="chapter" id="moment">
+<div class="chapter-number">02 <span>/</span> THE MOMENT</div>
+<div class="section-heading"><div><h2 id="moment-title">Changing a setting takes attention.</h2></div><p>This four-frame illustration shows how a menu can draw attention away from a moving scene. It is not footage or a measured usability event.</p></div>
+<div class="moment-layout">
+<div class="moment-stage" data-scene="0" id="momentStage">
+<img alt="Illustrative city photograph seen through a camera's shooting display" decoding="async" height="1320" loading="lazy" src="assets/sony/images/sony-asset-04-90f4bcc45135.webp" width="1864"/>
+<div class="moment-scrim"></div>
+<div aria-hidden="true" class="moment-menu"><small>SHOOTING</small><div>Image Quality <b>RAW</b></div><div class="moment-selected">Focus Mode <b>AF-C</b></div><div>Focus Area <b>Wide</b></div><div>Drive Mode <b>Single</b></div></div>
+<div class="moment-clock" id="momentStamp">00:00</div>
+<div aria-hidden="true" class="moment-scene-note"><span id="stageMomentText">The subject enters the frame</span></div>
+<div aria-hidden="true" class="moment-timer-track"><span id="momentFrameProgress"></span></div>
+<div aria-hidden="true" class="moment-lost">The moment has changed.</div>
+</div>
+<div class="moment-narrative">
+<p class="overline">FRAME 002 / THE INTERRUPTION</p>
+<div class="moment-line-slot">
+<p aria-live="polite" class="moment-line" id="momentLine">A subject enters the frame.</p>
+<p aria-hidden="true" class="moment-line moment-line-reserve">A subject enters the frame.</p>
+<p aria-hidden="true" class="moment-line moment-line-reserve">The photographer notices a setting that needs changing.</p>
+<p aria-hidden="true" class="moment-line moment-line-reserve">The menu takes attention away from the scene.</p>
+<p aria-hidden="true" class="moment-line moment-line-reserve">The subject has moved. The opportunity is different.</p>
+</div>
+<div aria-label="Scene animation playback" class="moment-player" role="group">
+<button aria-label="Play animation" class="moment-play" id="momentPlay" type="button">
+<span aria-hidden="true" id="momentPlayIcon">▶</span> <span id="momentPlayLabel">Play animation</span>
+</button>
+<button aria-label="Stop and return to first frame" class="moment-stop" id="momentStop" type="button">Stop / reset</button>
+<span aria-live="off" class="moment-counter" id="momentCounter">01 / 04</span>
+</div>
+<div aria-label="Explore the moment" class="moment-controls" role="group">
+<button class="on" data-scene="0" type="button"><b>00:00</b><span>See</span></button>
+<button data-scene="1" type="button"><b>00:01</b><span>Adjust</span></button>
+<button data-scene="2" type="button"><b>00:02</b><span>Navigate</span></button>
+<button data-scene="3" type="button"><b>00:03</b><span>Miss</span></button>
+</div>
+<p class="editor-note">Illustrative sequence, not footage of a participant. Play, pause, or select any frame.</p>
+</div>
+</div><p class="moment-credit">Illustrative live-view scene adapted from the original project artwork; navigation states are explanatory, not field footage.</p>
+<p class="statement">DESIGN QUESTION · How can photographers check necessary controls while keeping attention on the scene?</p>
+<a class="chapter-next" href="#research"><span>Continue to research</span><span aria-hidden="true">↘</span></a></section>
+<section aria-labelledby="research-title" class="chapter" id="research">
+<div class="chapter-number">03 <span>/</span> RESEARCH</div>
+<div class="section-heading"><div><h2 id="research-title">Where the interface gets in the way.</h2></div><p>Five conversations, the 13-question interview guide, FigJam synthesis and an interface audit informed the scope. These materials do not measure usability outcomes.</p></div>
+<article aria-labelledby="research-featured-title" class="research-featured">
+<div class="research-featured-head"><span class="overline">01 / FIELD NOTE · VISIBILITY</span><h3 id="research-featured-title">Reading camera information outdoors</h3></div>
+<div class="research-featured-visual"><figure class="evidence-figure research-featured-figure"><button aria-label="Enlarge highlighted FigJam observation about visibility in strong daylight" class="zoom" data-source="assets/sony/images/sony-asset-05-a8cc87aed121.png" type="button"><img alt="Original FigJam note about camera screen visibility in bright sunlight" decoding="async" height="618" loading="lazy" src="assets/sony/images/sony-asset-06-a17db58df3b3.webp" width="1656"/></button><figcaption><strong class="fig-title">FIG. 03 — Outdoor readability, research-board excerpt</strong><span class="fig-source">FigJam field observation · Source documentation (not an interview quotation)</span></figcaption><div class="artifact-annotations"><div><b>01</b><p>Bright daylight affects the legibility of the camera display.</p></div><div><b>02</b><p>Live-view overlays compete with changing image detail.</p></div><div><b>03</b><p>Test solid backing for important on-screen values.</p></div></div></figure></div>
+<div class="research-featured-copy"><span class="overline">OBSERVATION → DESIGN QUESTION</span><p class="research-observation">The FigJam note raises outdoor legibility as a concern. The solid-backed overlay is a proposal, not a tested fix.</p></div>
+</article><div class="research-body">
+<div class="research-aside"><p class="overline">HOW IT WAS STUDIED</p><h3>Research method and source material</h3><p>The 13 questions address screen distractions, lighting, status recognition and exposure. The guide documents the research plan, not participants’ answers.</p><button aria-controls="lightbox" aria-haspopup="dialog" aria-label="View all 13 interview questions in the image viewer" class="subtle-link zoom" data-caption="High-resolution interview guide · 13 questions · research material (not interview answers)" data-source="assets/sony/images/sony-asset-07-120e8ec8d89d.png" type="button">View the 13 interview questions ↗</button><button class="subtle-link zoom research-photo-link" data-caption="Research-session photographs from the original FigJam material. Documentation only; no participant quotations are inferred." data-source="assets/sony/images/sony-asset-08-ca450e27015c.png" type="button">View research-session photographs ↗</button></div>
+<div class="research-entries">
+<article class="research-entry">
+<div class="research-entry-header"><span>NOTE 02</span><h3>Present isn't the same as noticeable.</h3></div>
+<p>The board notes that a small battery indicator can be overlooked during shooting.</p>
+<div class="evidence-ref evidence-secondary battery-evidence"><button aria-label="Enlarge battery information note" class="zoom" data-source="assets/sony/images/sony-asset-09-ac38a4a761b4.png" type="button"><img alt="FigJam annotation pointing to a small battery status indicator" decoding="async" height="894" loading="lazy" src="assets/sony/images/sony-asset-10-e3f95a66d500.webp" style="width:100%;height:auto;object-fit:contain;max-height:none;" width="1348"/></button><span>FIGJAM SOURCE<br/>Battery/status</span></div>
+<p class="so-what">Interpretation — A visible icon is not necessarily noticed. This observation is distinct from the Shooting-menu evidence used in Solution 03.</p>
+</article>
+</div>
+</div>
+<aside aria-labelledby="published-voice-heading" class="field-voice">
+<div class="field-voice-top"><p class="overline">PUBLISHED CAMERA REVIEWS / SECONDARY RESEARCH</p><h3 id="published-voice-heading">Different reviewers, different preferences</h3></div>
+<div class="field-voice-grid">
+<div class="field-voice-quote"><span>REVIEWER EXPERIENCE / IMAGING RESOURCE</span><blockquote>“I found it much quicker to just use physical controls for menu navigation.”</blockquote><p>One α7 IV reviewer preferred physical controls to using the small touchscreen, supporting a directional-navigation option.</p><a href="https://www.imaging-resource.com/cameras/sony-a7-iv-review/" rel="noopener noreferrer" target="_blank">Read the published review ↗</a></div>
+<div class="field-voice-counter"><span>THE COUNTERPOINT / RTINGS</span><h4>The newer system is already more organized.</h4><p>RTINGS describes the α7 IV menus as organized and usable by touch or physical controls. This work targets selected interactions, not the entire system.</p><a href="https://www.rtings.com/camera/reviews/sony/a7-iv" rel="noopener noreferrer" target="_blank">Read the independent review ↗</a></div>
+</div>
+<p class="field-voice-bottom">These α7 IV reviews are cross-model secondary references—not participants in the five conversations, and not a test of the α7S III proposal.</p>
+</aside><div class="research-end"><span>THIRD CONSIDERATION</span><p>I kept directional navigation alongside touch; this design choice still needs testing.</p><button class="subtle-link zoom" data-caption="Sony and Canon controls compared on the research board" data-source="assets/sony/images/sony-asset-11-37621002fb3f.png" type="button">Inspect camera comparison ↗</button></div>
+<figure aria-label="Photographic pause after the research" class="research-pause">
+<img alt="Scene photograph from the original Sony Alpha project artwork" decoding="async" height="1320" loading="lazy" src="assets/sony/images/sony-asset-04-90f4bcc45135.webp" width="1864"/>
+<div class="pause-words"><span>FROM OBSERVATION TO DESIGN</span><p>The photograph changes behind the camera's information.</p></div>
+<figcaption>Editorial photograph from the project artwork · not usability evidence.</figcaption></figure>
+<a class="chapter-next" href="#solutions"><span>Continue to the design decisions</span><span aria-hidden="true">↘</span></a></section>
+<section aria-labelledby="solutions-title" class="chapter solutions-chapter" id="solutions">
+<div class="chapter-number">04 <span>/</span> THE FOUR DESIGN SOLUTIONS</div>
+<div class="solutions-heading">
+<p class="kicker">INTERFACE DECISIONS / FOUR PROPOSALS</p>
+<h2 id="solutions-title">What the redesign changes</h2>
+<p>Four targeted changes address visibility, organization and interpretation—without removing professional controls.</p>
+</div><section aria-label="Why these four solutions" class="solution-strategy"><div class="strategy-bridge">
+<p class="overline">FROM RESEARCH TO DESIGN</p>
+<h3>KEEP THE CONTROLS.<em>Make them easier to find.</em></h3>
+</div>
+<div class="strategy-intro">
+<span class="overline">HOW THE PRIORITIES CONNECT</span>
+<h3>Choose a manageable scope</h3>
+<p>I focused on four documented interaction concerns rather than redesigning every camera function. Specialist controls and terminology remain available.</p>
+</div><div aria-label="Evidence to design responses" class="decision-map">
+<div><span>INTERFACE AUDIT · Exposure values spread across live view</span><b>Bring exposure controls together</b></div>
+<div><span>INTERFACE AUDIT · Quick settings have similar visual weight</span><b>Distinguish settings and selections</b></div>
+<div><span>MENU COMPARISON · Current values are not shown in the captured rows</span><b>Show the current setting in the list</b></div>
+<div><span>INTERFACE AUDIT · Format labels need context</span><b>Add concise information at the choice</b></div>
+</div>
+<div class="strategy-pair strategy-constraints">
+<div><span class="strategy-index">WHILE SHOOTING</span><h4>The image remains the priority.</h4><p>Information must stay readable over scenes that change in brightness and detail.</p></div>
+<div><span class="strategy-index">INSIDE THE MENU</span><h4>Professional controls stay intact.</h4><p>The proposals change how settings are surfaced and explained, not the functions the camera offers.</p></div>
+</div>
+<p class="strategy-footnote">Priorities combine exploratory research, interface observation and design hypotheses; they are not ranked interview findings.</p>
+</section>
+<nav aria-label="Jump between design solutions" class="solutions-index">
+<a href="#solution-01"><span>01</span> Exposure grouping</a>
+<a href="#solution-02"><span>02</span> Colour signifiers</a>
+<a href="#solution-03"><span>03</span> Visible settings</a>
+<a href="#solution-04"><span>04</span> File-format choices</a>
+</nav>
+<article class="solution-piece supporting-solution" id="solution-01">
+<div class="solution-header"><span class="solution-number">01 <small>/ 04</small></span><div><p class="solution-tag">01 / SPATIAL RELATIONSHIPS</p><h3>Keep exposure settings together.</h3><p class="solution-summary">Group shutter, aperture and ISO near the bottom of the live view.</p></div></div><figure class="solution-visual is-viewfinder"><button aria-label="Enlarge redesigned live-view exposure grouping" class="zoom" type="button"><img alt="Proposed Sony Alpha live view showing 1/200 shutter, F2.8 aperture, and ISO 800 together near the bottom" decoding="async" height="1320" loading="lazy" src="assets/sony/images/sony-asset-12-0847bb5d90f0.jpg" width="1864"/></button><figcaption><strong class="fig-title">FIG. 04 — Exposure grouping</strong><span class="fig-source">Proposed bottom-centred exposure group. The small original-screen reference is shown beside the audit note.</span></figcaption></figure>
+<div class="problem-solution">
+<div class="ps-problem"><p class="ps-label">THE ORIGINAL PROBLEM</p><p>The captured display spreads shutter speed, aperture and ISO across its lower edge. The fine exposure-meter lines also risk becoming hard to distinguish against bright scenes.</p><figure class="archival-reference"><button aria-label="Enlarge original live-view exposure display" class="zoom" data-caption="Original live-view exposure display · Source interface audit" type="button"><img alt="Original live-view exposure display from the archived interface audit, shown as contextual evidence" data-full-src="assets/sony/images/sony-asset-13-c3cf23fa032b.webp" decoding="async" height="478" loading="lazy" src="assets/sony/images/sony-asset-14-ee7c1fff8f72.webp" width="650"/></button><figcaption>ORIGINAL INTERFACE / AUDIT REFERENCE · Tap to inspect</figcaption></figure></div>
+<div class="ps-answer"><p class="ps-label">THE DESIGN SOLUTION</p><p>Bring the three values into one bottom-centred group and give the data consistent dark backing, without covering the central subject.</p></div>
+</div>
+<p class="solution-takeaway">Trade-off — Grouping uses live-view space. Test legibility and image obstruction across lighting conditions.</p>
+</article>
+<article class="solution-piece supporting-solution" id="solution-02">
+<div class="solution-header"><span class="solution-number">02 <small>/ 04</small></span><div><p class="solution-tag">02 / VISUAL SIGNIFIERS</p><h3>Make settings easier to tell apart.</h3><p class="solution-summary">Use opaque tiles, category edges and a clear selected state.</p></div></div><figure class="solution-visual is-settings"><button aria-label="Enlarge redesigned quick-settings tile grid" class="zoom" type="button"><img alt="Proposed quick-settings grid over a street photograph with two rows of dark controls and colored tile borders" decoding="async" height="1320" loading="lazy" src="assets/sony/images/sony-asset-15-3a914a1a0e29.jpg" width="1864"/></button><figcaption><strong class="fig-title">FIG. 05 — Quick-settings categories</strong><span class="fig-source">The coloured edges separate categories; the opaque tile surfaces help text stand apart from the photograph.</span></figcaption></figure><div aria-label="Visual states in the proposed quick-settings screen" class="semantic-legend"><div><b>SELECTED</b><span>Distinct highlight</span></div><div><b>SHOOTING</b><span>Red edge + label</span></div><div><b>FOCUS</b><span>Purple edge + label</span></div></div>
+<div class="problem-solution">
+<div class="ps-problem"><p class="ps-label">ORIGINAL CONDITION / DOCUMENTED AUDIT</p><p>In the captured quick-settings grid, semi-transparent cells sit over the live image and several controls have similar visual weight.</p><figure class="archival-reference"><button aria-label="Enlarge original quick-settings grid" class="zoom" data-caption="Original quick-settings grid · Source interface audit" type="button"><img alt="Original quick-settings grid from the archived interface audit, shown as contextual evidence" data-full-src="assets/sony/images/sony-asset-16-d2292c77f443.webp" decoding="async" height="502" loading="lazy" src="assets/sony/images/sony-asset-17-1216391a76a3.webp" width="650"/></button><figcaption>ORIGINAL INTERFACE / AUDIT REFERENCE · Tap to inspect</figcaption></figure></div>
+<div class="ps-answer"><p class="ps-label">PROPOSED INTERFACE / DOCUMENTED SCREEN</p><p>Use opaque tiles for legibility, category edges for orientation, and a separate selected-state treatment. Labels stay visible.</p></div>
+</div>
+<p class="solution-takeaway">Trade-off — Category cues must remain distinguishable through labels and selection states without relying on colour alone.</p>
+</article>
+<article aria-label="Featured solution: visible active Shooting-menu values" class="solution-piece is-key" id="solution-03">
+<div class="solution-header"><span class="solution-number">03 <small>/ 04</small></span><div><p class="solution-tag">03 / FEATURED · VISIBLE CURRENT VALUES</p><h3>See the value before opening the setting.</h3><p class="solution-summary">The matched screenshots show the active value beside each setting name, before another row is opened.</p></div></div><div class="feature-statement"><span class="overline">THE STRONGEST DOCUMENTED CHANGE</span><p>See the value without opening the row.</p></div><div aria-label="Documented change from original to proposal" class="documented-process">
+<p class="overline">FROM EXISTING INTERFACE TO PROPOSED MENU</p>
+<div class="process-steps">
+<div><span>01 / EXISTING MENU</span><p>Setting names are listed without values in the captured view.</p></div>
+<div><span>02 / OBSERVATION</span><p>Checking status can require opening a setting.</p></div>
+<div><span>03 / INTERVENTION</span><p>Introduce an aligned active-value column.</p></div>
+<div><span>04 / PROPOSAL</span><p>Keep the menu categories and selection state.</p></div>
+</div><p class="process-source">Original reference and proposed screen. The exact reference firmware is unverified.</p>
+</div><div aria-label="Matched original and proposed Shooting menu screenshots" class="matched-images">
+<figure><div class="matched-label">ORIGINAL — INFORMATION REQUIRES ANOTHER STEP</div><button aria-label="Enlarge original Shooting menu" class="zoom" type="button"><img alt="Original Shooting menu: setting names shown without current active values alongside" decoding="async" height="776" loading="lazy" src="assets/sony/images/sony-asset-18-87d32080b665.png" width="1068"/></button><figcaption><strong class="fig-title">FIG. 06A — Original Shooting menu</strong><span class="fig-source">Original Sony Shooting-menu reference screenshot</span></figcaption></figure>
+<figure><div class="matched-label">PROPOSED — THE CURRENT STATE IS VISIBLE</div><button aria-label="Enlarge redesigned Shooting menu" class="zoom" type="button"><img alt="Redesigned Shooting menu: setting names on the left and current values aligned on the right" decoding="async" height="776" loading="lazy" src="assets/sony/images/sony-asset-03-676fb21dd418.png" width="1068"/></button><figcaption><strong class="fig-title">FIG. 06B — Proposed Shooting menu</strong><span class="fig-source">Project redesign with values aligned beside labels</span></figcaption><div aria-label="Three visual changes in the proposed menu" class="screen-annotations"><div><span>1</span><p>Active values visible in the right-hand column</p></div><div><span>2</span><p>Selection state retained on the orange row</p></div></div></figure>
+</div>
+<p class="solution-takeaway">Trade-off — A current-value column allows checking the proposed menu without first opening each row, but it makes the list denser. This screen does not redesign the “2/49” pagination shown in the reference; recognition, reading errors and density need testing.</p>
+</article>
+<article class="solution-piece supporting-solution" id="solution-04">
+<div class="solution-header"><span class="solution-number">04 <small>/ 04</small></span><div><p class="solution-tag">INFORMATION ARCHITECTURE</p><h3>Make recording formats easier to compare.</h3><p class="solution-summary">Remove duplicate badges and add short explanations at the point of selection, while keeping Sony format names intact.</p></div></div><figure class="solution-visual is-fileformat"><button aria-label="Enlarge proposed File Format selection screen" class="zoom" type="button"><img alt="Proposed File Format dialog listing XAVC HS 4K, XAVC S 4K, XAVC S-I 4K and XAVC S-I HD with concise explanations" decoding="async" height="1266" loading="lazy" src="assets/sony/images/sony-asset-19-47ab84c6035f.jpg" width="1810"/></button><figcaption><strong class="fig-title">FIG. 07 — FILE FORMAT / CONTEXT AT THE CHOICE</strong><span class="fig-source">The proposed screen uses one aligned text column and short descriptions. The cues are design copy, not validated guidance.</span></figcaption></figure>
+<div class="problem-solution">
+<div class="ps-problem"><p class="ps-label">THE ORIGINAL PROBLEM</p><p>The captured format list repeats the format name in small stacked badges and in adjacent text. Different badge widths disrupt the left-hand reading edge.</p><figure class="archival-reference"><button aria-label="Enlarge original recording-format selection" class="zoom" data-caption="Original recording-format selection · Source interface audit" type="button"><img alt="Original recording-format selection from the archived interface audit, shown as contextual evidence" data-full-src="assets/sony/images/sony-asset-20-c9f583d9729a.webp" decoding="async" height="481" loading="lazy" src="assets/sony/images/sony-asset-21-f68f0bf6e30f.webp" width="650"/></button><figcaption>ORIGINAL INTERFACE / AUDIT REFERENCE · Tap to inspect</figcaption></figure></div>
+<div class="ps-answer"><p class="ps-label">THE DESIGN SOLUTION</p><p>Remove repeated badges, align the format names, and add one short compression or workflow cue beneath each option.</p></div>
+</div>
+<div class="format-explainer">
+<span class="overline">WHAT CHANGED IN THE CONTENT</span>
+<div class="format-example"><div><b>Technical name</b><p>XAVC S 4K</p></div><div><b>Added context in the concept</b><p>“Standard (H.264). Highly compatible.”</p></div></div>
+<p>Whether this helps people choose the intended format is still unknown.</p>
+</div><div class="format-depth"><div class="format-depth-copy"><span class="overline">DESIGN EXTENSION / PROGRESSIVE DISCLOSURE</span><h4>Short descriptions, optional detail</h4><p>Optional detail explains compression and workflow without extending every menu row. This layer is exploratory, not an archival screen.</p></div><div class="format-depth-visual"><div class="depth-row"><span>XAVC S-I 4K</span><b>4K · All-Intra · editing-friendly</b></div><div class="depth-extra">WHY THIS MATTERS<br/><small>Each frame is compressed separately. Editing is generally more responsive, but files can be larger than Long GOP options.</small></div><p>Source for recording-format behavior: <a href="https://helpguide.sony.net/ilc/2410/v1/en/contents/0412B_file_format.html" rel="noopener noreferrer" target="_blank">Sony α7S III File Format Help Guide ↗</a></p></div></div>
+<p class="solution-takeaway">Open question — Do left-aligned names and concise format cues improve correct choices, or mainly make the list quicker to scan? No task results have been collected.</p>
+</article>
+<p class="source-boundary">Evidence boundary — The project identifies the Sony α7S III, but the captured screens have no independently verified firmware or shooting-mode record. The supporting original-screen references in Solutions 01, 02 and 04 are contextual audits, not controlled before/after tests. Solution 03 contains the directly matched Shooting-menu pair. Recent Sony firmware also has a Main menu for viewing and changing current settings; this is a proposal for a particular menu presentation, not a claim that Sony lacks current-value visibility across its system. <a href="https://helpguide.sony.net/ilc/2410/v1/en/contents/231h_main_menu_ilc2410.html" rel="noopener noreferrer" target="_blank">Sony α7S III Main menu guide ↗</a></p>
+<a class="chapter-next" href="#prototype"><span>Try the interface</span><span aria-hidden="true">↘</span></a></section>
+<section aria-labelledby="prototype-title" class="chapter" id="prototype">
+<div class="chapter-number">05 <span>/</span> INTERACTIVE PROTOTYPE</div>
+<div class="section-heading"><div><h2 id="prototype-title">Try the File Format menu</h2></div><p>A working menu study: check a value, open its row and change the setting.</p></div>
+<div class="prototype-task"><p class="overline">INTERACTIVE TASK / READ → CHANGE → CONFIRM</p><h3>Find the current File Format.</h3><p>Find the current File Format, change it to XAVC S-I 4K, and confirm the new value.</p></div>
+<div aria-label="Prototype views" class="prototype-tabs" role="group"><button aria-pressed="true" class="active" data-panel="shooting" id="tabShooting" type="button">Shooting menu</button><button aria-pressed="false" data-panel="quick" id="tabQuick" type="button">Quick settings / live view</button></div>
+<div class="prototype-area"><div class="prototype-workbench"><div class="camera-simulation">
+<header><span>α / INTERFACE CONCEPT</span><span id="demoPath">SHOOTING MENU</span></header>
+<div aria-description="Use Arrow Up and Arrow Down to move; Enter to select; Escape to go back." aria-label="Camera menu; use arrows, Enter and Escape" class="camera-screen" id="demoScreen" role="group" tabindex="0"><img alt="" aria-hidden="true" class="quick-scene" decoding="async" height="1320" loading="lazy" src="assets/sony/images/sony-asset-04-90f4bcc45135.webp" width="1864"/><div id="demoList"></div><div class="screen-softkey" id="screenSoftkey">CURRENT FILE FORMAT <b id="currentFormat">XAVC S 4K</b></div></div>
+<footer>↑ ↓ MOVE <span>ENTER SELECT</span> ESC BACK</footer>
+</div><div class="prototype-controller"><div aria-label="Camera directional controls" class="dpad" role="group"><button aria-label="Move up" class="up" data-control="ArrowUp" type="button">↑</button><button aria-label="Go back" class="left" data-control="Escape" type="button">←</button><button aria-label="Select setting" class="center" data-control="Enter" type="button">OK</button><button aria-label="Open selection" class="right" data-control="ArrowRight" type="button">→</button><button aria-label="Move down" class="down" data-control="ArrowDown" type="button">↓</button></div><p aria-atomic="true" aria-live="polite" class="status" id="demoFeedback" role="status">Current value visible: XAVC S 4K. No submenu needed.</p></div></div>
+<div class="task-copy"><p class="overline">WHAT TO NOTICE</p><h3>Use the directional controls.</h3><p>Click a row, or focus the screen and use ↑ ↓, Enter to select, and Esc to go back. The on-screen arrows and OK work on mobile.</p>
+<button class="reset" id="demoReset" type="button">Reset the demo ↺</button>
+<p class="demo-note">A browser-based interaction model, not camera firmware. It illustrates a proposed interaction rather than a measured improvement.</p>
+</div>
+</div>
+<a class="chapter-next" href="#evaluation"><span>Read the reflection</span><span aria-hidden="true">↘</span></a></section><section aria-labelledby="evaluation-title" class="chapter evaluation-chapter" id="evaluation">
+<div class="chapter-number">06 <span>/</span> EVALUATION &amp; REFLECTION</div>
+<div class="section-heading"><div><h2 id="evaluation-title">What still needs testing</h2></div><p>The prototype shows the interaction, but does not establish improvement. Testing needs a defined camera model, firmware and representative tasks.</p></div>
+<div class="evaluation-plan"><div><p class="overline">FORMATIVE STUDY PLAN</p><h3>Compare tasks on a documented baseline</h3><p>Measure completion, wrong turns, backtracking, time on task, confidence and recognition of current values—not assumed speed gains.</p></div>
+<ol><li><b>Read</b> File Format from the menu <span>Can the current value be recognized immediately?</span></li><li><b>Change</b> the format to XAVC S-I 4K <span>Navigation errors and backtracking</span></li><li><b>Explain</b> why they chose a format <span>Does contextual help improve understanding?</span></li><li><b>Inspect</b> ISO, shutter and aperture <span>Does proximity help in live view?</span></li></ol></div>
+<div class="ending"><div><span class="overline">WHAT I BUILT</span><p>Four proposed interface changes, a matched menu comparison and an interactive File Format task.</p></div><div><span class="overline">NOT YET PROVEN</span><p>Whether any proposal improves recognition, speed, confidence or format understanding.</p></div><div><span class="overline">WHAT I WOULD TEST</span><p>The same tasks on an α7S III with its exact firmware, shooting mode and menu configuration recorded, then on the proposal. Compare task steps, errors and recognition.</p></div></div><div class="reflection-learning">
+<span class="overline">THE PRINCIPLE EXPLORED</span>
+<p>The principle I explored is selective visibility: professional controls can stay intact while the current state becomes easier to recognize. The unresolved question is whether added values help without making the menu too dense.</p>
+</div><figure class="return-photograph"><div class="return-image"><img alt="Black-and-white close-up of a photographer with the camera raised; cropped from the original case-study photography" decoding="async" height="900" loading="eager" src="assets/sony/images/sony-asset-22-98a4a59c618a.webp" width="1600"/></div><figcaption><strong class="fig-title">FRAME 003 — THE RETURN</strong><span class="fig-source">Editorial project photograph · not a usability result.</span></figcaption><div class="return-overlay"><p>THE INTERFACE DID ITS JOB.</p><em>It got out of the way.</em></div></figure>
+<div class="reference-note"><span class="overline">TECHNICAL REFERENCES</span><p>The project names the α7S III. Sony documents a current-settings Main menu on α7S III firmware 3 and later, and describes XAVC S 4K as Long GOP and XAVC S-I 4K as intra-frame recording. These capabilities depend on camera mode and firmware; the exact original screenshot settings remain unverified. The project illustrations are not proof of a limitation in every Sony firmware version. <a href="https://helpguide.sony.net/ilc/2410/v1/en/contents/231h_main_menu_ilc2410.html" rel="noopener noreferrer" target="_blank">Main menu</a> · <a href="https://helpguide.sony.net/ilc/2410/v1/en/contents/0412B_file_format.html" rel="noopener noreferrer" target="_blank">File Format guide</a></p></div>
+<div class="final-line"><span>A DESIGN INTENTION, NOT A MEASURED OUTCOME</span><p>Less time in menus.<em class="display-italic">More time looking.</em></p></div>
+<p class="signature-line">FORM <em class="display-italic">FOLLOWS</em> FUNCTION.</p><footer class="site-footer"><p>Independent Sony Alpha UX concept; not commissioned or endorsed by Sony. Project credit: Eeshitvaa Singh. Published third-party reviews are identified separately from field research.</p><a href="#overview">Back to top ↑</a></footer>
+</section>
+</main>
+</div>
+<div aria-label="Enlarged source image" aria-modal="true" class="lightbox" hidden="" id="lightbox" role="dialog"><button class="lightbox-close" id="lightboxClose" type="button">Close ×</button><img alt="" id="lightboxImg"/><p id="lightboxCaption"></p></div>
+<script>(() => {
+  'use strict';
+  const $=(q,root=document)=>root.querySelector(q);
+  const $$=(q,root=document)=>Array.from(root.querySelectorAll(q));
+
+  // Chapter navigation and reading progress.
+  const chapters=$$('.chapter');
+  const links=$$('.rail-nav a');
+  const bar=$('#progressBar');
+  let scheduled=false;
+  function refreshNav(){
+    let active=chapters[0]?.id||'overview';
+    const pivot=window.innerHeight*.30;
+    for(const chapter of chapters) if(chapter.getBoundingClientRect().top<=pivot) active=chapter.id;
+    links.forEach(link=>{
+      const isActive=link.getAttribute('href')==='#'+active;
+      link.classList.toggle('current',isActive);
+      if(isActive)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+    });
+    const distance=Math.max(0,document.documentElement.scrollHeight-innerHeight);
+    if(bar)bar.style.width=distance?`${Math.min(100,Math.max(0,scrollY/distance*100))}%`:'0%';
+    scheduled=false;
+  }
+  addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(refreshNav)}},{passive:true});
+  addEventListener('resize',refreshNav);refreshNav();
+
+  // Existing four-frame scenario: scroll-triggered playback with direct controls.
+  const momentSection=$('#moment');
+  const stage=$('#momentStage');
+  const sceneButtons=$$('.moment-controls button[data-scene]');
+  const momentPlay=$('#momentPlay');
+  const momentStop=$('#momentStop');
+  const momentProgress=$('#momentFrameProgress');
+  const storyLines=[
+    'A subject enters the frame.',
+    'The photographer notices a setting that needs changing.',
+    'The menu takes attention away from the scene.',
+    'The subject has moved. The opportunity is different.'
+  ];
+  const overlayLines=[
+    'The subject enters the frame',
+    'A camera setting needs changing',
+    'Attention moves to the menu',
+    'The moment has changed'
+  ];
+  const FRAME_DURATION=2600;
+  const motionReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let scene=0,elapsed=0,rafId=0,frameStarted=0;
+  let isPlaying=false,hasStarted=false,manualPause=false,completed=false,withinView=false;
+  function showScene(n){
+    if(!stage)return;
+    scene=Math.max(0,Math.min(3,n));
+    stage.dataset.scene=String(scene);
+    $('#momentStamp').textContent=`00:0${scene}`;
+    $('#momentLine').textContent=storyLines[scene];
+    $('#stageMomentText').textContent=overlayLines[scene];
+    $('#momentCounter').textContent=`0${scene+1} / 04`;
+    sceneButtons.forEach(button=>{
+      const selected=Number(button.dataset.scene)===scene;
+      button.classList.toggle('on',selected);
+      button.setAttribute('aria-pressed',String(selected));
+    });
+  }
+  function paintMomentProgress(){
+    if(momentProgress)momentProgress.style.transform=`scaleX(${Math.min(1,elapsed/FRAME_DURATION)})`;
+  }
+  function updateMomentButton(){
+    const label=isPlaying?'Pause':completed?'Replay':'Play animation';
+    $('#momentPlayLabel').textContent=label;
+    $('#momentPlayIcon').textContent=isPlaying?'Ⅱ':'▶';
+    momentPlay.setAttribute('aria-label',label);
+    momentPlay.setAttribute('aria-pressed',String(isPlaying));
+    stage.classList.toggle('is-playing',isPlaying);
+  }
+  function stopMomentTick(){
+    isPlaying=false;
+    cancelAnimationFrame(rafId);
+    rafId=0;
+    updateMomentButton();
+  }
+  function tickMoment(timestamp){
+    if(!isPlaying)return;
+    if(frameStarted===0)frameStarted=timestamp;
+    const delta=Math.min(100,timestamp-frameStarted);
+    frameStarted=timestamp;
+    elapsed+=Math.max(0,delta);
+    if(elapsed>=FRAME_DURATION){
+      elapsed=0;
+      if(scene===3){
+        completed=true;
+        stopMomentTick();
+        momentProgress.style.transform='scaleX(1)';
+        return;
+      }
+      showScene(scene+1);
+    }
+    paintMomentProgress();
+    rafId=requestAnimationFrame(tickMoment);
+  }
+  function playMoment(fromUser=false){
+    if(fromUser)manualPause=false;
+    if(isPlaying)return;
+    if(completed){showScene(0);elapsed=0;completed=false;}
+    hasStarted=true;
+    isPlaying=true;
+    frameStarted=0;
+    updateMomentButton();
+    rafId=requestAnimationFrame(tickMoment);
+  }
+  function pauseMoment(userInitiated=false){
+    if(userInitiated)manualPause=true;
+    stopMomentTick();
+  }
+  momentPlay?.addEventListener('click',()=>{
+    if(isPlaying)pauseMoment(true);
+    else playMoment(true);
+  });
+  momentStop?.addEventListener('click',()=>{
+    pauseMoment(true);
+    completed=false;
+    elapsed=0;
+    showScene(0);
+    paintMomentProgress();
+    updateMomentButton();
+  });
+  sceneButtons.forEach(button=>button.addEventListener('click',()=>{
+    pauseMoment(true);
+    completed=false;
+    elapsed=0;
+    showScene(Number(button.dataset.scene));
+    paintMomentProgress();
+    updateMomentButton();
+  }));
+  showScene(0);
+  updateMomentButton();
+  if(momentSection && 'IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      withinView=entry.isIntersecting && entry.intersectionRatio>=.33;
+      if(withinView && !document.hidden && !manualPause && !completed && !motionReduced){
+        playMoment();
+      }else if(!withinView && isPlaying){
+        pauseMoment(false);
+      }
+    },{threshold:[0,.33,.6]});
+    observer.observe(stage);
+  }
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden && isPlaying)pauseMoment(false);
+    else if(!document.hidden && withinView && hasStarted && !manualPause && !completed && !motionReduced)playMoment();
+  });
+
+  // Source-image viewer. Original and proposed screens are never silently swapped.
+  const dialog=$('#lightbox');
+  const dialogImg=$('#lightboxImg');
+  const dialogCaption=$('#lightboxCaption');
+  const dialogClose=$('#lightboxClose');
+  let returnFocus=null;
+  function openLightbox(button){
+    const image=$('img',button);
+    const source=(button.dataset.sourceRef==='researchGuide'?document.querySelector('#research .research-wide button.zoom')?.dataset.source:null)||button.dataset.source||image?.dataset.fullSrc||image?.currentSrc||image?.src;
+    if(!source)return;
+    returnFocus=button;
+    dialogImg.src=source;
+    dialogImg.alt=image?.alt||'';
+    dialogCaption.textContent=button.dataset.caption||button.closest('figure')?.querySelector('figcaption')?.textContent||image?.alt||'';
+    dialog.hidden=false;
+    document.body.classList.add('viewing-image');
+    dialogClose.focus();
+  }
+  function closeLightbox(){dialog.hidden=true;document.body.classList.remove('viewing-image');returnFocus?.focus();}
+  $$('.zoom').forEach(button=>button.addEventListener('click',()=>openLightbox(button)));
+  dialogClose.addEventListener('click',closeLightbox);
+  dialog.addEventListener('click',event=>{if(event.target===dialog)closeLightbox();});
+  document.addEventListener('keydown',event=>{
+    if(!dialog.hidden && event.key==='Escape'){event.preventDefault();closeLightbox();}
+    if(!dialog.hidden && event.key==='Tab'){
+      event.preventDefault();dialogClose.focus();
+    }
+  });
+
+  // Working camera-interface study: values can be read on the menu root.
+  const screen=$('#demoScreen'),list=$('#demoList'),path=$('#demoPath');
+  const feedback=$('#demoFeedback'),softkey=$('#screenSoftkey'),currentLabel=$('#currentFormat');
+  const tabs=$$('[data-panel]');
+  const formats=[
+    {value:'XAVC HS 4K',brief:'4K · H.265 / HEVC · efficient',long:'Uses HEVC and Long GOP compression. Efficient files, but playback or editing may need compatible, capable hardware.'},
+    {value:'XAVC S 4K',brief:'4K · H.264 · Long GOP',long:'Uses the XAVC S format at 4K resolution. Long GOP compression offers efficient recording and broad codec support.'},
+    {value:'XAVC S-I 4K',brief:'4K · All-Intra · edit-friendly',long:'Compresses each frame independently. Generally more flexible during editing, with lower compression efficiency than Long GOP.'},
+    {value:'XAVC S HD',brief:'Full HD · H.264 · Long GOP',long:'Records at 1920 × 1080 using XAVC S. A lower-resolution option than the 4K recording formats.'},
+    {value:'XAVC S-I HD',brief:'Full HD · All-Intra',long:'Records at Full HD resolution using All-Intra compression, making frame-by-frame editing easier.'}
+  ];
+  let selected=0,mode='menu',subview='root',fileFormat='XAVC S 4K',focusMode='AF-C',details=false;
+  const rootItems=()=>[
+    {name:'File Format',value:fileFormat,type:'formats'},
+    {name:'Movie Settings',value:'25p / 100M',type:'info'},
+    {name:'Focus Mode',value:focusMode,type:'focus'},
+    {name:'Exposure Mode',value:'Manual',type:'info'},
+    {name:'White Balance',value:'Auto',type:'info'},
+    {name:'Proxy Recording',value:'Off',type:'info'}
+  ];
+  const focusChoices=['AF-C','AF-S','MF'];
+  const quickItems=[
+    {name:'Shutter',value:'1/250',category:'shooting'},
+    {name:'Aperture',value:'F2.8',category:'shooting'},
+    {name:'ISO',value:'800',category:'shooting'},
+    {name:'Focus Mode',value:focusMode,category:'focus'},
+    {name:'Focus Area',value:'Wide',category:'focus'},
+    {name:'Drive Mode',value:'Single',category:'shooting'}
+  ];
+  function currentItems(){return mode==='quick'?quickItems:subview==='formats'?formats:subview==='focus'?focusChoices.map(value=>({value,name:value})):rootItems();}
+  function makeRow(item,index){
+    const row=document.createElement('button');
+    row.type='button';
+    const active=index===selected;
+    row.className=`camera-row${active?' selected':''}${mode==='quick'?' quick-tile':''}`;
+    if(item.category)row.dataset.category=item.category;
+    if(active)row.setAttribute('aria-current','true');
+    const label=document.createElement('span');label.className='row-name';label.textContent=item.name||item.value;
+    row.appendChild(label);
+    const value=document.createElement('span');value.className='row-value';
+    value.textContent=subview==='formats'?item.brief:mode==='quick'?item.value:(subview==='focus'?'':item.value);
+    if(value.textContent)row.appendChild(value);
+    if(mode==='menu' && subview==='root'){
+      const arrow=document.createElement('span');arrow.className='row-arrow';arrow.textContent='›';row.appendChild(arrow);
+    }
+    row.addEventListener('click',()=>{selected=index;choose();screen.focus({preventScroll:true});});
+    return row;
+  }
+  function render(){
+    if(!list)return;
+    list.replaceChildren();
+    screen.classList.toggle('quick-view',mode==='quick');
+    list.classList.toggle('quick-grid',mode==='quick');
+    const rows=currentItems();
+    rows.forEach((item,index)=>list.appendChild(makeRow(item,index)));
+    path.textContent=mode==='quick'?'QUICK SETTINGS':subview==='formats'?'FILE FORMAT':subview==='focus'?'FOCUS MODE':'SHOOTING MENU';
+    currentLabel.textContent=fileFormat;
+    softkey.hidden=mode==='quick'||subview!=='root';
+    if(mode==='menu' && subview==='formats'){
+      const extra=document.createElement('div');extra.className='format-help';
+      const button=document.createElement('button');button.type='button';button.className='format-help-trigger';
+      button.textContent=details?'− Hide detail':'+ More detail';
+      button.setAttribute('aria-expanded',String(details));
+      button.addEventListener('click',()=>{details=!details;render();});
+      extra.appendChild(button);
+      if(details){const p=document.createElement('p');p.textContent=formats[selected].long;extra.appendChild(p);}
+      list.appendChild(extra);
+    }
+    tabs.forEach(tab=>{const active=tab.dataset.panel===(mode==='quick'?'quick':'shooting');tab.classList.toggle('active',active);tab.setAttribute('aria-pressed',String(active));});
+  }
+  function choose(){
+    if(mode==='quick'){
+      const item=quickItems[selected];
+      feedback.classList.remove('complete');
+      feedback.textContent=`${item.name}: ${item.value}. Grouped controls and category cues are shown together.`;
+      render();return;
+    }
+    if(subview==='formats'){
+      fileFormat=formats[selected].value;
+      subview='root';selected=0;details=false;
+      feedback.textContent=fileFormat==='XAVC S-I 4K'?'Task completed — File Format changed to XAVC S-I 4K. The new value is visible here.':`File Format changed to ${fileFormat}. The current value is visible in the menu.`;
+      feedback.classList.toggle('complete',fileFormat==='XAVC S-I 4K');
+      render();return;
+    }
+    if(subview==='focus'){
+      focusMode=focusChoices[selected];subview='root';selected=2;
+      feedback.textContent=`Focus Mode is now ${focusMode}. Its active value appears on the root menu.`;
+      feedback.classList.remove('complete');render();return;
+    }
+    const item=rootItems()[selected];
+    if(item.type==='formats'){subview='formats';selected=formats.findIndex(f=>f.value===fileFormat);details=false;feedback.textContent='Compare recording formats. Select an option, or choose More detail for context.';}
+    else if(item.type==='focus'){subview='focus';selected=focusChoices.indexOf(focusMode);feedback.textContent='Choose a focus mode.';}
+    else feedback.textContent=`${item.name}: ${item.value}. Its value can be read without opening a new screen.`;
+    render();
+  }
+  function back(){if(subview!=='root'){const was=subview;subview='root';selected=was==='formats'?0:2;details=false;render();return;}if(mode==='quick'){mode='menu';selected=0;render();}}
+  function act(key){
+    const rows=currentItems();
+    if(key==='ArrowUp')selected=(selected+rows.length-1)%rows.length;
+    else if(key==='ArrowDown')selected=(selected+1)%rows.length;
+    else if(key==='ArrowLeft'||key==='Escape'){back();return;}
+    else if(key==='ArrowRight'||key==='Enter'){choose();return;}
+    else return;
+    details=false;render();
+  }
+  tabs.forEach(tab=>tab.addEventListener('click',()=>{
+    mode=tab.dataset.panel==='quick'?'quick':'menu';
+    selected=0;subview='root';details=false;
+    feedback.classList.remove('complete');
+    feedback.textContent=mode==='quick'?'Shutter, aperture and ISO share one group. Shooting and focus tiles have distinct visual cues.':`Current value visible: ${fileFormat}. No submenu needed.`;
+    render();
+  }));
+  $$('[data-control]').forEach(button=>button.addEventListener('click',()=>{act(button.dataset.control);screen.focus({preventScroll:true});}));
+  screen.addEventListener('keydown',event=>{
+    if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter','Escape'].includes(event.key)){
+      event.preventDefault();act(event.key);
+    }
+  });
+  $('#demoReset').addEventListener('click',()=>{
+    mode='menu';subview='root';selected=0;fileFormat='XAVC S 4K';focusMode='AF-C';details=false;
+    feedback.textContent='Current value visible: XAVC S 4K. No submenu needed.';
+    feedback.classList.remove('complete');render();screen.focus({preventScroll:true});
+  });
+  render();
+})();
+</script></body>
+</html>
