@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>VISUAL ARCHIVE | MIDNIGHT</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. NEW COLOR CONFIGURATION --- */
+        :root {
+            --bg: #02040a;       /* Deep Midnight Blue */
+            --text: #f0f0f0;     /* Soft White */
+            --accent: #d4af37;   /* Gold Accent */
+            --card-bg: #0a0f1c;  /* Slightly lighter blue for cards */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+            overflow: hidden; 
+            width: 100vw; height: 100vh;
+            cursor: grab;
+            user-select: none;
+        }
+        body:active { cursor: grabbing; }
+
+        /* --- CINEMATIC BACKGROUND --- */
+        .cinematic-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: #02040a; /* Fallback color */
+        }
+
+        .bg-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0.3; /* Subtle visibility */
+            filter: blur(8px) grayscale(40%) sepia(20%); /* Sepia gives it a cinematic gold tint */
+            transform: scale(1.1);
+        }
+
+        .bg-1 {
+            background-image: url('draco.jpg'); 
+            animation: kenburns 30s infinite alternate;
+        }
+
+        .bg-2 {
+            background-image: url('jinx.png');
+            animation: kenburns 30s infinite alternate-reverse;
+            mix-blend-mode: overlay;
+            opacity: 0.15;
+        }
+
+        @keyframes kenburns {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1.3); }
+        }
+
+        /* Vignette (Blue/Black Tint) */
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(2,4,10,0) 40%, rgba(2,4,10,1) 100%);
+            z-index: 0; pointer-events: none;
+        }
+
+        /* --- UI LAYER --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 2.5rem 3rem;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            z-index: 100; pointer-events: none; 
+            /* Removed mix-blend-mode for cleaner gold text */
+        }
+        
+        .brand {
+            font-family: 'Italiana', serif; font-size: 2rem; line-height: 1;
+            pointer-events: auto; cursor: pointer; 
+            color: var(--accent); /* Gold Logo */
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- BACK BUTTON --- */
+        .back-btn {
+            pointer-events: auto;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+            background: rgba(10, 15, 28, 0.4);
+        }
+        .back-btn:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Grain */
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 90; mix-blend-mode: overlay;
+        }
+
+        .instructions {
+            position: fixed; bottom: 3rem; left: 50%; transform: translateX(-50%);
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+            color: rgba(255,255,255,0.6);
+            pointer-events: none; z-index: 80; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* --- THE GRID --- */
+        #grid-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            perspective: 1000px; z-index: 10;
+        }
+
+        .grid-item {
+            position: absolute; top: 0; left: 0;
+            width: 250px; height: 333px;
+            background: var(--card-bg); /* Dark Blue Card Background */
+            overflow: hidden;
+            will-change: transform;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            
+            pointer-events: auto; cursor: pointer;
+        }
+
+        .grid-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            pointer-events: none;
+            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.3s;
+            opacity: 0.85;
+            filter: sepia(10%); /* Slight vintage tone */
+        }
+
+        @media (hover: hover) {
+            .grid-item:hover { 
+                z-index: 20; 
+                box-shadow: 0 0 40px rgba(76, 114, 255, 0.2); /* Blue glow on hover */
+                border-color: rgba(255,255,255,0.4); 
+            }
+            .grid-item:hover img { transform: scale(1.1); opacity: 1; filter: sepia(0%); }
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 200; pointer-events: none;
+            display: flex; opacity: 0; transition: opacity 0.5s;
+        }
+        .modal.active { opacity: 1; pointer-events: auto; }
+
+        .modal-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 4, 10, 0.95); backdrop-filter: blur(20px);
+        }
+
+        .modal-content {
+            position: relative; z-index: 2; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column;
+        }
+
+        .modal-img {
+            max-width: 90%; max-height: 80vh;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal.active .modal-img { transform: scale(1); }
+
+        .close-btn {
+            margin-top: 2rem;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 12px 35px; border-radius: 50px;
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;
+            cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px);
+        }
+        .close-btn:hover { background: var(--accent); color: black; border-color: var(--accent); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem; }
+            .grid-item { width: 160px; height: 213px; }
+            .brand { font-size: 1.5rem; }
+            .back-btn { padding: 8px 15px; font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- BACKGROUND LAYERS -->
+<div class="cinematic-bg">
+    <div class="bg-slide bg-1"></div>
+    <div class="bg-slide bg-2"></div>
+</div>
+<div class="vignette"></div>
+<div class="grain"></div>
+
+<nav>
+    <div class="brand">STUDIO.<br>GRAPHICS</div>
+    
+    <!-- BUTTON TO GO BACK HOME -->
+    <a href="work.html" class="back-btn">← Back to Portfolio</a>
+</nav>
+
+<div class="instructions">Drag to Explore • Click to Expand</div>
+
+<div id="grid-container">
+    <!-- Items loaded by JS -->
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-bg" id="modal-bg"></div>
+    <div class="modal-content">
+        <img src="" class="modal-img" id="modal-img">
+        <button class="close-btn" id="close-btn">Close View</button>
+    </div>
+</div>
+
+<script>
+    // --- 1. YOUR IMAGES ---
+    const images = [
+        { src: "draco.jpg" },
+        { src: "illustration1.png" },
+        { src: "heimer.jpg" },
+        { src: "jinx.png" },
+        { src: "medusa.png" },
+        { src: "Mel.jpg" },
+        { src: "taylor-rep.png" },
+        { src: "violet.png" },
+        { src: "CONTENT.jpg" },
+        { src: "digital-marketing.png" },
+        { src: "draco.jpg" },
+        { src: "artwork2.png" },
+        { src: "artwork1.png" },
+        { src: "silence-p1.jpeg"}
+    ];
+
+    // --- 2. CONFIG ---
+    const isMobile = window.innerWidth < 768;
+    const settings = {
+        cols: isMobile ? 3 : 5,      
+        gap: isMobile ? 12 : 25,     
+        speed: 0.08,                 
+        skewStrength: 0.12           
+    };
+
+    // --- 3. GENERATE GRID ---
+    const container = document.getElementById('grid-container');
+    const items = [];
+    
+    // Calculate Sizes
+    let itemWidth = isMobile ? 160 : 250;
+    let itemHeight = isMobile ? 213 : 333;
+    let fullWidth = itemWidth + settings.gap;
+    let fullHeight = itemHeight + settings.gap;
+
+    // Create Infinite List
+    const displayList = [...images, ...images, ...images]; 
+
+    displayList.forEach((data, index) => {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        div.innerHTML = `<img src="${data.src}">`;
+        
+        // --- CLICK LOGIC ---
+        let startX, startY;
+        div.addEventListener('mousedown', e => { startX = e.clientX; startY = e.clientY; });
+        div.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, {passive: true});
+        
+        const handleClick = (e) => {
+            const endX = e.clientX || (e.changedTouches ? e.changedTouches[0].clientX : 0);
+            const endY = e.clientY || (e.changedTouches ? e.changedTouches[0].clientY : 0);
+            const dist = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+
+            // If dragged less than 10px, treat as click
+            if(dist < 10) openModal(data.src);
+        };
+        
+        div.addEventListener('click', handleClick);
+
+        container.appendChild(div);
+        items.push({ el: div, index: index });
+    });
+
+    // --- 4. ANIMATION LOOP ---
+    let current = { x: 0, y: 0 };
+    let target = { x: 0, y: 0 };
+    let vel = { x: 0, y: 0 };
+
+    function animate() {
+        // Smooth Movement
+        current.x += (target.x - current.x) * settings.speed;
+        current.y += (target.y - current.y) * settings.speed;
+        
+        // Velocity (for Liquid Effect)
+        vel.x = target.x - current.x;
+        vel.y = target.y - current.y;
+
+        // Grid Math
+        const wrapW = settings.cols * fullWidth;
+        const rows = Math.ceil(items.length / settings.cols);
+        const wrapH = rows * fullHeight;
+
+        items.forEach((item, i) => {
+            const col = i % settings.cols;
+            const row = Math.floor(i / settings.cols);
+
+            let x = (col * fullWidth) + current.x;
+            let y = (row * fullHeight) + current.y;
+
+            // Infinite Wrap Logic
+            x = ((x % wrapW) + wrapW) % wrapW; 
+            y = ((y % wrapH) + wrapH) % wrapH;
+
+            // Centering
+            x -= wrapW / 2; 
+            y -= wrapH / 2;
+            x += window.innerWidth / 2;
+            y += window.innerHeight / 2;
+
+            // Cinematic Skew
+            const skewX = vel.x * settings.skewStrength * 0.5;
+            const skewY = vel.y * settings.skewStrength * 0.5;
+            const scale = 1 + (Math.abs(vel.x) + Math.abs(vel.y)) * 0.0005;
+
+            item.el.style.transform = `translate3d(${x}px, ${y}px, 0) skew(${skewX}deg, ${skewY}deg) scale(${scale})`;
+        });
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // --- 5. DRAG EVENTS ---
+    let isDown = false;
+    let startDragX, startDragY;
+
+    const onStart = (e) => {
+        isDown = true;
+        startDragX = e.clientX || e.touches[0].clientX;
+        startDragY = e.clientY || e.touches[0].clientY;
+        document.body.style.cursor = 'grabbing';
+    };
+
+    const onMove = (e) => {
+        if(!isDown) return;
+        const x = e.clientX || e.touches[0].clientX;
+        const y = e.clientY || e.touches[0].clientY;
+        
+        target.x += (x - startDragX) * 1.5;
+        target.y += (y - startDragY) * 1.5;
+        
+        startDragX = x;
+        startDragY = y;
+    };
+
+    const onEnd = () => {
+        isDown = false;
+        document.body.style.cursor = 'grab';
+    };
+
+    window.addEventListener('mousedown', onStart);
+    window.addEventListener('touchstart', onStart);
+    
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove);
+    
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+
+    window.addEventListener('wheel', e => {
+        target.y -= e.deltaY * 0.8;
+        target.x -= e.deltaX * 0.8;
+    });
+
+    // --- 6. MODAL ---
+    const modal = document.getElementById('modal');
+    const closeBtn = document.getElementById('close-btn');
+
+    function openModal(src) {
+        document.getElementById('modal-img').src = src;
+        modal.classList.add('active');
+    }
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    document.getElementById('modal-bg').addEventListener('click', closeModal);
+
+</script>
+</body>
+
+</html>
+

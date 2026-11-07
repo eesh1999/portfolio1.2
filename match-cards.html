@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Match Ultimate: Fixed Edition</title>
+    <style>
+        /* 
+         * =========================================================
+         *  1. VARIABLES & THEME
+         * =========================================================
+         */
+        :root {
+            /* Palette */
+            --bg-body: #05040a;
+            --bg-surface: #120f1f;
+            
+            /* The "Lavender & Neon" Theme */
+            --color-lavender: #C4A1FF; 
+            --color-lavender-glow: rgba(196, 161, 255, 0.4);
+            --color-neon: #E2FF00;
+            --color-neon-glow: rgba(226, 255, 0, 0.5);
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+
+            /* Metrics */
+            --card-radius: 12px;
+            --header-h: 70px;
+            
+            /* Physics */
+            --anim-speed: 0.6s;
+            --anim-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* 
+         * =========================================================
+         *  2. CORE LAYOUT
+         * =========================================================
+         */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(196, 161, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(226, 255, 0, 0.05) 0%, transparent 50%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #app-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 500px;
+            max-height: 900px;
+            background: var(--bg-surface);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        @media(min-width: 520px) {
+            #app-frame {
+                height: 90vh;
+                border-radius: 32px;
+                border: 6px solid #2a253a;
+            }
+        }
+
+        /* Canvas for Particles */
+        #fx-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 90;
+        }
+
+        /* 
+         * =========================================================
+         *  3. HUD & HEADER
+         * =========================================================
+         */
+        .hud {
+            height: var(--header-h);
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(18, 15, 31, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            z-index: 50;
+        }
+
+        .hud-brand h1 {
+            margin: 0;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-lavender);
+            text-shadow: 0 0 10px var(--color-lavender-glow);
+        }
+
+        .hud-stats {
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat-pill {
+            background: rgba(255,255,255,0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stat-label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+        .stat-val { font-size: 16px; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+        /* 
+         * =========================================================
+         *  4. GAME BOARD (Grid)
+         * =========================================================
+         */
+        .board-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            perspective: 1200px; /* Critical for 3D depth */
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* 
+         * =========================================================
+         *  5. THE CARD (Robust Flip Logic)
+         * =========================================================
+         */
+        
+        /* 1. The Container: Stationary target for clicks. Does NOT rotate. */
+        .card-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1/1.1; /* Slightly tall like real cards */
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 2. The Flipper: The element that actually rotates */
+        .card-flipper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform var(--anim-speed) var(--anim-bounce);
+            border-radius: var(--card-radius);
+        }
+
+        /* FLIP STATE: This class is added by JS to rotate the flipper */
+        .card-container.is-flipped .card-flipper {
+            transform: rotateY(180deg);
+        }
+
+        /* MATCH STATE: Hide pointer events, add glow */
+        .card-container.is-matched {
+            pointer-events: none;
+        }
+        .card-container.is-matched .card-flipper {
+            transform: rotateY(180deg) scale(0.95);
+        }
+        .card-container.is-matched .back-face {
+            box-shadow: 0 0 20px var(--color-neon-glow);
+            border-color: var(--color-neon);
+            filter: brightness(1.1);
+        }
+
+        /* 3. The Faces: Front and Back */
+        .face {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            backface-visibility: hidden; /* Standard */
+            -webkit-backface-visibility: hidden; /* Safari Fix */
+            border-radius: var(--card-radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* FRONT: The Lavender Cover (Visible initially) */
+        .front-face {
+            background: linear-gradient(135deg, var(--color-lavender), #9e7ce6);
+            transform: rotateY(0deg);
+            z-index: 2;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Pattern on Front */
+        .front-face::after {
+            content: '?';
+            font-size: 24px;
+            color: rgba(255,255,255,0.3);
+            font-weight: 800;
+        }
+
+        /* BACK: The Emoji (Hidden initially) */
+        .back-face {
+            background: var(--color-neon);
+            transform: rotateY(180deg);
+            z-index: 1;
+            /* Invert font color because background is bright yellow */
+            color: #000; 
+            border: 2px solid transparent;
+        }
+
+        /* 
+         * =========================================================
+         *  6. MENUS & OVERLAYS
+         * =========================================================
+         */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(5, 4, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        .overlay.active { opacity: 1; pointer-events: auto; }
+
+        h2.screen-title {
+            color: #fff;
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .btn-main {
+            margin-top: 30px;
+            background: var(--color-neon);
+            color: #000;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--color-neon-glow);
+            transition: transform 0.2s;
+        }
+        .btn-main:active { transform: scale(0.95); }
+
+    </style>
+</head>
+<body>
+
+<div id="app-frame">
+    <!-- Particles -->
+    <canvas id="fx-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="hud">
+        <div class="hud-brand">
+            <h1>Match<br>Cards</h1>
+        </div>
+        <div class="hud-stats">
+            <div class="stat-pill">
+                <span class="stat-label">Time</span>
+                <span class="stat-val" id="ui-time">00:00</span>
+            </div>
+            <div class="stat-pill">
+                <span class="stat-label">Score</span>
+                <span class="stat-val" id="ui-score">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Board -->
+    <div class="board-wrapper">
+        <div class="game-grid" id="game-grid">
+            <!-- Cards will be injected here -->
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="screen-start" class="overlay active">
+        <div style="font-size:60px; margin-bottom:20px;">🧩</div>
+        <h2 class="screen-title">Ready?</h2>
+        <div style="color:var(--text-secondary)">Find all pairs to win</div>
+        <button class="btn-main" onclick="Game.init()">Start Game</button>
+    </div>
+
+    <!-- Win Screen -->
+    <div id="screen-win" class="overlay">
+        <div style="font-size:60px; margin-bottom:20px;">🏆</div>
+        <h2 class="screen-title">Victory!</h2>
+        <div style="color:var(--text-secondary); margin-bottom:10px">Final Score</div>
+        <div id="final-score" style="font-size:32px; color:var(--color-neon); font-weight:700">0</div>
+        <button class="btn-main" onclick="Game.init()">Play Again</button>
+    </div>
+</div>
+
+<script>
+/**
+ * =========================================================
+ *  AUDIO SYSTEM (Web Audio API)
+ *  Generates sounds on the fly (no files needed)
+ * =========================================================
+ */
+const AudioSys = {
+    ctx: null,
+    
+    init() {
+        if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if(this.ctx.state === 'suspended') this.ctx.resume();
+    },
+
+    play(type) {
+        if(!this.ctx) return;
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        if (type === 'flip') {
+            // High "Click"
+            osc.frequency.setValueAtTime(800, t);
+            gain.gain.setValueAtTime(0.05, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+            osc.start(t);
+            osc.stop(t + 0.1);
+        } 
+        else if (type === 'match') {
+            // Success Chord
+            this.tone(523.25, 0); // C
+            this.tone(659.25, 0.1); // E
+            this.tone(783.99, 0.2); // G
+        }
+        else if (type === 'win') {
+            // Fanfare
+            [523, 659, 783, 1046, 523, 659, 783, 1046].forEach((f, i) => {
+                this.tone(f, i * 0.1, 0.1, 'square');
+            });
+        }
+    },
+
+    tone(freq, delay, vol=0.1, wave='sine') {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        const t = this.ctx.currentTime + delay;
+        
+        osc.type = wave;
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(vol, t + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.4);
+    }
+};
+
+/**
+ * =========================================================
+ *  PARTICLE SYSTEM (Confetti)
+ * =========================================================
+ */
+const FX = {
+    canvas: document.getElementById('fx-canvas'),
+    ctx: document.getElementById('fx-canvas').getContext('2d'),
+    particles: [],
+
+    resize() {
+        this.canvas.width = this.canvas.parentElement.offsetWidth;
+        this.canvas.height = this.canvas.parentElement.offsetHeight;
+    },
+
+    burst(x, y) {
+        for(let i=0; i<30; i++) {
+            this.particles.push({
+                x: x, y: y,
+                vx: (Math.random()-0.5) * 10,
+                vy: (Math.random()-0.5) * 10,
+                color: Math.random() > 0.5 ? '#E2FF00' : '#C4A1FF',
+                life: 1.0
+            });
+        }
+    },
+
+    loop() {
+        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+        for(let i=this.particles.length-1; i>=0; i--) {
+            let p = this.particles[i];
+            p.x += p.vx; p.y += p.vy;
+            p.vy += 0.2; // Gravity
+            p.life -= 0.02;
+            this.ctx.globalAlpha = p.life;
+            this.ctx.fillStyle = p.color;
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
+            this.ctx.fill();
+            if(p.life <= 0) this.particles.splice(i,1);
+        }
+        requestAnimationFrame(() => this.loop());
+    }
+};
+FX.resize();
+FX.loop();
+window.addEventListener('resize', () => FX.resize());
+
+
+/**
+ * =========================================================
+ *  GAME LOGIC
+ * =========================================================
+ */
+const Game = {
+    emojis: ['👻', '👽', '👾', '🤖', '🎃', '💀', '🤡', '👹', '👺', '🐲'],
+    cards: [], // Stores DOM elements and state
+    flipped: [], // Stores currently flipped card indices
+    isLocked: false,
+    score: 0,
+    startTime: 0,
+    timerInt: null,
+
+    init() {
+        AudioSys.init();
+        this.resetUI();
+        
+        // 1. Create Deck
+        // 4x5 Grid = 20 cards = 10 pairs
+        let deck = [...this.emojis, ...this.emojis]; 
+        this.shuffle(deck);
+
+        // 2. Render Grid
+        const grid = document.getElementById('game-grid');
+        grid.innerHTML = '';
+        
+        // Rows calculated automatically by CSS Grid
+        // Just injecting 20 items
+        this.cards = deck.map((emoji, index) => {
+            return this.createCard(emoji, index, grid);
+        });
+
+        // 3. Start Game
+        this.startTimer();
+    },
+
+    resetUI() {
+        document.getElementById('screen-start').classList.remove('active');
+        document.getElementById('screen-win').classList.remove('active');
+        this.score = 0;
+        this.flipped = [];
+        this.isLocked = false;
+        document.getElementById('ui-score').innerText = '0';
+        document.getElementById('ui-time').innerText = '00:00';
+    },
+
+    createCard(emoji, index, container) {
+        // --- Structure ---
+        // .card-container (Click Target)
+        //   .card-flipper (Rotates)
+        //     .front-face (Lavender)
+        //     .back-face (Yellow Emoji)
+        
+        const wrap = document.createElement('div');
+        wrap.className = 'card-container';
+        
+        const flipper = document.createElement('div');
+        flipper.className = 'card-flipper';
+        
+        const front = document.createElement('div');
+        front.className = 'face front-face'; // Lavender cover
+        
+        const back = document.createElement('div');
+        back.className = 'face back-face';   // Emoji content
+        back.innerText = emoji;
+
+        flipper.appendChild(front);
+        flipper.appendChild(back);
+        wrap.appendChild(flipper);
+        
+        // Click Listener on the WRAPPER (Stable target)
+        wrap.addEventListener('click', () => this.handleTap(index));
+
+        container.appendChild(wrap);
+        
+        return { 
+            el: wrap, 
+            emoji: emoji, 
+            index: index, 
+            matched: false 
+        };
+    },
+
+    handleTap(index) {
+        const card = this.cards[index];
+
+        // Safety Checks
+        if (this.isLocked) return;
+        if (card.matched) return;
+        if (this.flipped.includes(index)) return; // Don't click same card twice
+
+        // Visual Flip
+        AudioSys.play('flip');
+        card.el.classList.add('is-flipped');
+        this.flipped.push(index);
+
+        // Check Logic
+        if (this.flipped.length === 2) {
+            this.checkMatch();
+        }
+    },
+
+    checkMatch() {
+        this.isLocked = true;
+        const [idx1, idx2] = this.flipped;
+        const c1 = this.cards[idx1];
+        const c2 = this.cards[idx2];
+
+        const isMatch = c1.emoji === c2.emoji;
+
+        if (isMatch) {
+            this.processMatch(c1, c2);
+        } else {
+            this.processMiss(c1, c2);
+        }
+    },
+
+    processMatch(c1, c2) {
+        setTimeout(() => {
+            AudioSys.play('match');
+            
+            // Visuals
+            c1.el.classList.add('is-matched');
+            c2.el.classList.add('is-matched');
+            c1.matched = true;
+            c2.matched = true;
+            
+            // Particles at card positions
+            const r1 = c1.el.getBoundingClientRect();
+            const r2 = c2.el.getBoundingClientRect();
+            FX.burst(r1.left + r1.width/2, r1.top + r1.height/2);
+            FX.burst(r2.left + r2.width/2, r2.top + r2.height/2);
+
+            // Score
+            this.score += 100;
+            document.getElementById('ui-score').innerText = this.score;
+
+            // Cleanup
+            this.flipped = [];
+            this.isLocked = false;
+
+            // Win Condition
+            const allMatched = this.cards.every(c => c.matched);
+            if(allMatched) this.win();
+
+        }, 500);
+    },
+
+    processMiss(c1, c2) {
+        setTimeout(() => {
+            c1.el.classList.remove('is-flipped');
+            c2.el.classList.remove('is-flipped');
+            this.flipped = [];
+            this.isLocked = false;
+        }, 1000);
+    },
+
+    startTimer() {
+        this.startTime = Date.now();
+        if(this.timerInt) clearInterval(this.timerInt);
+        this.timerInt = setInterval(() => {
+            const delta = Math.floor((Date.now() - this.startTime) / 1000);
+            const m = Math.floor(delta / 60).toString().padStart(2, '0');
+            const s = (delta % 60).toString().padStart(2, '0');
+            document.getElementById('ui-time').innerText = `${m}:${s}`;
+        }, 1000);
+    },
+
+    shuffle(arr) {
+        for(let i=arr.length-1; i>0; i--) {
+            const j = Math.floor(Math.random()*(i+1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    },
+
+    win() {
+        clearInterval(this.timerInt);
+        setTimeout(() => {
+            AudioSys.play('win');
+            document.getElementById('final-score').innerText = this.score;
+            document.getElementById('screen-win').classList.add('active');
+            // Big confetti rain
+            setInterval(() => {
+                FX.burst(Math.random()*window.innerWidth, Math.random()*window.innerHeight);
+            }, 300);
+        }, 500);
+    }
+};
+
+</script>
+</body>
+</html>
