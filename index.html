@@ -700,8 +700,35 @@ body.skip-home-intro #pageTransition {
   display: none !important;
 }
 </style>
+
+<style id="intro-yellow-sheet-transition">
+#intro-yellow-sheet{
+  position:fixed;
+  inset:0;
+  z-index:1000001;
+  background:#F2B928;
+  transform:translateY(100%);
+  pointer-events:none;
+  visibility:hidden;
+}
+#intro-yellow-sheet.is-rising{
+  visibility:visible;
+  animation:introYellowRise 1.05s cubic-bezier(.76,0,.24,1) forwards;
+}
+@keyframes introYellowRise{
+  0%{transform:translateY(100%);}
+  52%{transform:translateY(0);}
+  66%{transform:translateY(0);}
+  100%{transform:translateY(-100%);}
+}
+@media(prefers-reduced-motion:reduce){
+  #intro-yellow-sheet{display:none!important;}
+}
+</style>
+
 </head>
 <body class="intro-running">
+<div id="intro-yellow-sheet" aria-hidden="true"></div>
 <script>
 /* Returning from Work: show the settled homepage immediately. */
 if (sessionStorage.getItem('eeshitvaaReturnHome') === '1') {
@@ -832,16 +859,16 @@ if (sessionStorage.getItem('eeshitvaaReturnHome') === '1') {
 
         <div class="project-rail" role="tablist" aria-label="Selected projects">
           <button class="project-tab is-active" type="button" role="tab" aria-selected="true" data-project="0">
-            <span class="tab-no">01</span><span class="tab-main"><strong>SONY ALPHA</strong><small>Camera UI / Interaction Redesign</small></span><span class="tab-arrow">↗</span>
+            <span class="tab-no">01</span><span class="tab-main"><strong>SONY ALPHA</strong><small>Camera UI / Interaction Redesign</small></span><a class="tab-arrow" href="sony.html" aria-label="Open Sony Alpha case study">↗</a>
           </button>
           <button class="project-tab" type="button" role="tab" aria-selected="false" data-project="1">
-            <span class="tab-no">02</span><span class="tab-main"><strong>VISIONEASE</strong><small>Inclusive / Assistive Experience</small></span><span class="tab-arrow">↗</span>
+            <span class="tab-no">02</span><span class="tab-main"><strong>VISIONEASE</strong><small>Inclusive / Assistive Experience</small></span><a class="tab-arrow" href="visionease.html" aria-label="Open VisionEase case study">↗</a>
           </button>
           <button class="project-tab" type="button" role="tab" aria-selected="false" data-project="2">
-            <span class="tab-no">03</span><span class="tab-main"><strong>CITY ORCHESTRA</strong><small>Interaction Design / Creative Technology</small></span><span class="tab-arrow">↗</span>
+            <span class="tab-no">03</span><span class="tab-main"><strong>CITY ORCHESTRA</strong><small>Interaction Design / Creative Technology</small></span><a class="tab-arrow" href="city-orchestra.html" aria-label="Open City Orchestra case study">↗</a>
           </button>
           <button class="project-tab" type="button" role="tab" aria-selected="false" data-project="3">
-            <span class="tab-no">04</span><span class="tab-main"><strong>STYLEPRISM</strong><small>Fashion / Mobile Product</small></span><span class="tab-arrow">↗</span>
+            <span class="tab-no">04</span><span class="tab-main"><strong>STYLEPRISM</strong><small>Fashion / Mobile Product</small></span><a class="tab-arrow" href="style.html" aria-label="Open StylePrism case study">↗</a>
           </button>
         </div>
 
@@ -1020,7 +1047,7 @@ if(!reduce){
 (()=>{const stage=document.querySelector('.work-stage');if(!stage)return;const tabs=[...stage.querySelectorAll('.project-tab')],visuals=[...stage.querySelectorAll('.stage-visual')],stories=[...stage.querySelectorAll('.story-panel')];let active=0;function select(i){active=i;stage.dataset.active=i;tabs.forEach((el,n)=>{el.classList.toggle('is-active',n===i);el.setAttribute('aria-selected',n===i?'true':'false')});visuals.forEach((el,n)=>el.classList.toggle('is-active',n===i));stories.forEach((el,n)=>el.classList.toggle('is-active',n===i))}tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>select(i));tab.addEventListener('mouseenter',()=>select(i));tab.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();select((i+1)%tabs.length);tabs[(i+1)%tabs.length].focus()}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();select((i-1+tabs.length)%tabs.length);tabs[(i-1+tabs.length)%tabs.length].focus()}})});const visualBox=stage.querySelector('.project-visuals');visualBox.addEventListener('pointermove',e=>{const r=visualBox.getBoundingClientRect();visualBox.style.setProperty('--mx',(e.clientX-r.left)+'px');visualBox.style.setProperty('--my',(e.clientY-r.top)+'px');if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;const img=visuals[active]?.querySelector('img');if(img)img.style.transform=`scale(1.035) translate(${x*-10}px,${y*-10}px)`});visualBox.addEventListener('pointerleave',()=>visuals.forEach(v=>{const img=v.querySelector('img');if(img)img.style.transform=''}));select(0)})();
 </script>
 
-<script id="video-intro-script">
+<script id="video-intro-script" type="text/plain">
 (()=>{
  const overlay=document.getElementById('video-intro');
  const video=document.getElementById('intro-video');
@@ -1040,6 +1067,67 @@ if(!reduce){
 (()=>{const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const link=document.querySelector('a[href="work.html"]');const overlay=document.querySelector('#pageTransition');if(!link||!overlay)return;link.addEventListener('click',e=>{if(reduce||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();const r=link.getBoundingClientRect();overlay.style.setProperty('--pt-left',(r.left+r.width/2)+'px');overlay.style.setProperty('--pt-top',(r.top+r.height/2)+'px');overlay.style.setProperty('--pt-width',r.width+'px');overlay.style.setProperty('--pt-height',r.height+'px');document.body.classList.add('pt-lock');sessionStorage.setItem('eeshitvaaTransition','to-work');requestAnimationFrame(()=>overlay.classList.add('is-active'));setTimeout(()=>{location.href='work.html'},690)});})();
 </script>
 
+
+
+<script id="video-intro-one-second-script">
+(()=>{
+  const overlay=document.getElementById('video-intro');
+  const video=document.getElementById('intro-video');
+  const skip=document.getElementById('video-skip');
+  const sheet=document.getElementById('intro-yellow-sheet');
+  if(!overlay||!video)return;
+
+  let done=false;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function revealImmediately(){
+    if(done)return;
+    done=true;
+    video.pause();
+    overlay.remove();
+    sheet?.remove();
+    document.body.classList.remove('intro-running');
+  }
+
+  function yellowReveal(){
+    if(done)return;
+    done=true;
+    video.pause();
+
+    if(reduce || !sheet){
+      overlay.remove();
+      document.body.classList.remove('intro-running');
+      return;
+    }
+
+    sheet.classList.add('is-rising');
+
+    // Once yellow fully covers the video, remove the video underneath it.
+    window.setTimeout(()=>{
+      overlay.remove();
+      document.body.classList.remove('intro-running');
+    },550);
+
+    // Clean up after the yellow sheet has travelled off the top.
+    window.setTimeout(()=>sheet.remove(),1150);
+  }
+
+  skip?.addEventListener('click',revealImmediately);
+
+  video.addEventListener('timeupdate',()=>{
+    if(video.currentTime>=2.0) yellowReveal();
+  });
+
+  video.addEventListener('error',revealImmediately);
+
+  // More precise fallback in case timeupdate fires late.
+  video.addEventListener('playing',()=>{
+    window.setTimeout(()=>{
+      if(!done) yellowReveal();
+    },2000);
+  },{once:true});
+})();
+</script>
 
 </body>
 </html>
